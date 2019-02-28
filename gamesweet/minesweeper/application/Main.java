@@ -1,5 +1,6 @@
 package gamesweet.minesweeper.application;
 	
+import gamesweet.minesweeper.model.Board;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -21,6 +22,8 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
+		Board b = new Board();
+		b.setUpBoard();
+//		launch(args);
 	}
 }
