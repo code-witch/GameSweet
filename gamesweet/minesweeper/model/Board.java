@@ -15,11 +15,13 @@ public class Board {
 		 * 	if(there's a mine square near the empty square){
 		 * 		change the empty square from empty to number
 		 * 	} else {
-		 * 		leave te square as an empty square
+		 * 		leave the square as an empty square
 		 * 	}
 		 * For the number square call the checkForMines() to figure out what number to show on screen
 		 * 
 		 */
+		
+//		changeBoardSize();
 		int boardsizex = board.length;
 		int boardsizey = board[0].length;
 		int mines = amountOfMines(boardsizey);
@@ -33,30 +35,24 @@ public class Board {
 			board[x][y] = minesquare;
 		}
 
-		// Set up the rest of the board
+		// Fills the rest of the board with empty spaces
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[i].length; j++) {
-				Square number = new Square(false, Squares.NUMBER);
-				//Checks the 9 squares around the specific square to see if its a mine 
-				if (board[i - 1][j - 1].getSquareType() == Squares.MINE
-						|| board[i - 1][j].getSquareType() == Squares.MINE
-						|| board[i - 1][j + 1].getSquareType() == Squares.MINE
-						|| board[i][j - 1].getSquareType() == Squares.MINE 
-						|| board[i][j + 1].getSquareType() == Squares.MINE 
-						|| board[i + 1][j - 1].getSquareType() == Squares.MINE 
-						|| board[i + 1][j].getSquareType() == Squares.MINE 
-						|| board[i + 1][j + 1].getSquareType() == Squares.MINE ) {
-					board[i][j] = number;
-				} else {
+				if (board[i][j] == null) {
 					Square empty = new Square(false, Squares.EMPTY);
 					board[i][j] = empty;
 				}
 			}
 		}
-		
-		
+		// Set up the number squares on the board
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[i].length; j++) {
+				checkAroundSquare(i, j);
+			}
+		}
+
 	}
-	
+
 	private int checkIfOccupiedByMine(int x, int y) {
 		// Check if a specific space is already occupied
 		if (board[x][y] != null) {
@@ -81,14 +77,29 @@ public class Board {
 
 	public void changeBoardSize() {
 		//Change size of board array depending on the difficulty (easy:9x9, medium:16x16, hard:16x30, custom:?x?)
+		
 	}
-	public boolean checkForMines(Square square) {
-		boolean isMine = false;
+	public void checkAroundSquare(int row, int col) {
+		//Checks the 9 squares around the specific square to see if its a mine 
+		Square number;
+		int mines = 0;
 		
-		
-		
-		
-		
-		return isMine;
+		for(int i = row - 1; i <= row + 1; i++) {
+			for(int j = col - 1; j <= col + 1; j++) {
+				if(i == row && j == col) {
+					continue;
+				} else if(i < 0 || i > board[0].length - 1) {
+					continue;
+				} else if(j < 0 || j > board[0].length - 1) {
+					continue;
+				} else if(board[i][j].getSquareType() == Squares.MINE){
+					mines++;
+				}
+			}
+		}
+		if(mines > 0) {
+			number = new Square(false, Squares.NUMBER);
+			board[row][col] = number;
+		} 
 	}
 }
