@@ -16,7 +16,7 @@ public class ConnectFour {
 	private static int turnCount;
 
 	public void run() {
-		createPlayers();
+//		createPlayers();
 		createBoard(selectDifficulty());
 		playGame();
 	}
@@ -28,17 +28,21 @@ public class ConnectFour {
 		player2 = name2;
 //		run();
 	}
+	
+	private void imCrSavedPlayers() {
+		
+	}
 
-	private void createPlayers() {
+	private void createGuestPlayers() {
 		// Prompt Player 1 for if they are on the leaderboard.
 			// 2 Options:
-			// Saved User
-			// Guest
+				// Saved User
+				// Guest
 
 		// Prompt Player 1 for if they are on the leaderboard.
 			// 2 Options:
-			// Saved User
-			// Guest
+				// Saved User
+				// Guest
 
 		// Hard-coded names for Guest
 		ArrayList<Chip> chips = new ArrayList<>();
