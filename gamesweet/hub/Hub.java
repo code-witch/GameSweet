@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import gamesweet.base.Game;
 import gamesweet.base.PlayerAmount;
-
+import gamesweet.minesweeper.controller.Minesweeper;
 import javafx.stage.Stage;
 
 public class Hub {
@@ -48,19 +48,12 @@ public class Hub {
 				// TODO Auto-generated method stub
 			}
 		});
-		gameOptions.put("Game4", new Game(PlayerAmount.ONE) {
+		gameOptions.put("Minesweeper", new Minesweeper(PlayerAmount.ONE)); 
+			
+		}
+		
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-			}
-
-			@Override
-			public void init(Stage stage, String... playerName) {
-				// TODO Auto-generated method stub
-			}
-		});
-	}
+	
 
 //	private void displayGames() {
 //	// displays all available games	
