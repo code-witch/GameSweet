@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import gamesweet.base.Game;
 import gamesweet.base.PlayerAmount;
-
+import gamesweet.connect4.controllers.ConnectFour;
 import javafx.stage.Stage;
 
 public class Hub {
@@ -12,18 +12,7 @@ public class Hub {
 	private HashMap<String, Game> gameOptions = new HashMap<>();
 
 	public Hub() {
-		gameOptions.put("Game1", new Game(PlayerAmount.TWO) {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-			}
-
-			@Override
-			public void init(Stage stage, String... playerName) {
-				// TODO Auto-generated method stub
-			}
-		});
+		gameOptions.put("Connect Four", new ConnectFour(PlayerAmount.TWO));
 		gameOptions.put("Game2", new Game(PlayerAmount.TWO) {
 
 			@Override

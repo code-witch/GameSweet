@@ -5,10 +5,16 @@ import java.util.HashMap;
 
 import gamesweet.connect4.models.*;
 import javafx.stage.Stage;
+import gamesweet.base.Game;
+import gamesweet.base.PlayerAmount;
 import gamesweet.connect4.GUI.GUI;
 import gamesweet.connect4.enums.*;
 
-public class ConnectFour {
+public class ConnectFour extends Game{
+	public ConnectFour(PlayerAmount playerAmount) {
+		super(playerAmount);
+	}
+
 	private String player1;
 	private String player2;
 	private Player[] players;
@@ -21,11 +27,11 @@ public class ConnectFour {
 		playGame();
 	}
 
-	public void init(Stage primaryStage, String name1, String name2) {
+	public void init(Stage primaryStage, String... playerName) {
 		//Calls the GUI class
 		GUI.run(primaryStage);
-		player1 = name1;
-		player2 = name2;
+		player1 = playerName[0];
+		player2 = playerName[1];
 //		run();
 	}
 	
