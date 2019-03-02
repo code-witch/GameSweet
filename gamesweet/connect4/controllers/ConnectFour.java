@@ -1,5 +1,10 @@
 package gamesweet.connect4.controllers;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,14 +22,30 @@ public class ConnectFour extends Game{
 
 	private String player1;
 	private String player2;
-	private Player[] players;
+	private Player[] players = new Player[2];
 	private Board board;
 	private static int turnCount;
+	private Leaderboard lb = null;
+	private boolean containL;
 
 	public void run() {
 //		createPlayers();
 		createBoard(selectDifficulty());
 		playGame();
+	}
+	
+	public boolean createSEn(String ID) {
+		boolean contains = imCrSavedPlayers(ID);
+		if (contains) {
+			createBoard(selectDifficulty());
+			System.out.println("ID is " + ID);
+		}
+		return contains;
+	}
+	
+	public void createGEn() {
+		createGuestPlayers();
+		createBoard(selectDifficulty());
 	}
 
 	public void init(Stage primaryStage, String... playerName) {
@@ -35,20 +56,17 @@ public class ConnectFour extends Game{
 //		run();
 	}
 	
-	private void imCrSavedPlayers() {
-		
+	private boolean imCrSavedPlayers(String ID) {
+		boolean contained = false;
+		importLeaderboard();
+		if(getContainL()) {
+			HashMap<String, Player> ps = lb.getPlayersL();
+			contained = ps.containsKey(ID);
+		}
+		return contained;
 	}
 
 	private void createGuestPlayers() {
-		// Prompt Player 1 for if they are on the leaderboard.
-			// 2 Options:
-				// Saved User
-				// Guest
-
-		// Prompt Player 1 for if they are on the leaderboard.
-			// 2 Options:
-				// Saved User
-				// Guest
 
 		// Hard-coded names for Guest
 		ArrayList<Chip> chips = new ArrayList<>();
@@ -104,10 +122,6 @@ public class ConnectFour extends Game{
 
 	}
 
-	// Method might be obsolete
-	private void printTurnState() {
-
-	}
 
 	private void takeTurn(Player player) {
 
@@ -132,18 +146,108 @@ public class ConnectFour extends Game{
 	}
 
 	private void createLeaderboard() {
-
+		Leaderboard lb = new Leaderboard();
+		FileOutputStream fileOut = null;
+		ObjectOutputStream out = null;
+		
+		try {
+			// Saving object into a file
+			fileOut = new FileOutputStream("official");
+			out = new ObjectOutputStream(fileOut);
+			// Serialization of the object
+			out.writeObject(lb);
+		} catch (IOException ioe) {
+			System.out.println("Exception is caught");
+		} finally {
+			try {
+			out.close();
+			fileOut.close();
+			System.out.println("Leaderboard created.");
+			} catch(IOException ioe2) {
+				System.out.println("Exception is caught");
+			}
+		}
 	}
 
-	private void addToLeaderboard() {
-
+	
+	private void addToLeaderboard(Player p) {
+		lb.addPlayer(p);
+		saveLeaderboard(lb.getPlayersL());
 	}
 
+	
 	private void saveLeaderboard(HashMap<String, Player> leaderboard) {
-
+		lb.setPlayersL(leaderboard);
+		FileOutputStream fileOut = null;
+		ObjectOutputStream out = null;
+		
+		try {
+			// Saving object into a file
+			fileOut = new FileOutputStream("official");
+			out = new ObjectOutputStream(fileOut);
+			// Serialization of the object
+			out.writeObject(lb);
+		} catch (IOException ioe) {
+			System.out.println("Exception is caught");
+		} finally {
+			try {
+			out.close();
+			fileOut.close();
+			System.out.println("Leaderboard created.");
+			} catch(IOException ioe2) {
+				System.out.println("Exception is caught");
+			}
+		}
 	}
 
-	private void printLeaderboard() {
+//	private void printLeaderboard() {
+//
+//	}
+	
+	
+	private void importLeaderboard() {
+		FileInputStream fileIn = null;
+		ObjectInputStream in = null;
+		boolean needCre = false;
+		
+		try {
+			// Reading the object from a file
+			fileIn = new FileInputStream("official");
+			in = new ObjectInputStream(fileIn);
 
+			// Deserialization of the object
+			lb = (Leaderboard) in.readObject();
+			System.out.println(lb);
+			
+		} catch (IOException ioe) {
+			System.out.println("Exception is caught");
+		} catch (ClassNotFoundException ex) {
+			System.out.println("ClassNotFoundException is caught.");
+			needCre = true;
+		} finally {
+			try {
+			in.close();
+			fileIn.close();
+			System.out.println("Deserialization completed.");
+			} catch(IOException ioe2) {
+				System.out.println("Exception is caught");
+			} catch(NullPointerException npe) {
+				needCre = true;
+			}
+		}
+		if(needCre) {
+			createLeaderboard();
+			setContainL(true);
+			needCre = false;
+		}
 	}
+
+	public boolean getContainL() {
+		return containL;
+	}
+	
+	public void setContainL(boolean containL) {
+		this.containL = containL;
+	}
+	
 }
