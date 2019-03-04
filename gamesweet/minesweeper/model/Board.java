@@ -7,6 +7,7 @@ public class Board {
 	private Square[][] board = new Square[9][9];
 	private Random rnd = new Random();
 	
+
 	public void setUpBoard() {
 		/* 
 		 * Get the length of the board 
@@ -47,6 +48,9 @@ public class Board {
 		// Set up the number squares on the board
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[i].length; j++) {
+				if(board[i][j].getSquareType() == Squares.MINE) {
+					continue;
+				}
 				checkAroundSquare(i, j);
 			}
 		}
@@ -88,12 +92,12 @@ public class Board {
 			for(int j = col - 1; j <= col + 1; j++) {
 				if(i == row && j == col) {
 					continue;
-				} else if(i < 0 || i > board[0].length - 1) {
+				} else if(i < 0 || i > board.length - 1) {
 					continue;
 				} else if(j < 0 || j > board[0].length - 1) {
 					continue;
 				} else if(board[i][j].getSquareType() == Squares.MINE){
-					mines++;
+					mines += 1;
 				}
 			}
 		}
@@ -101,5 +105,13 @@ public class Board {
 			number = new Square(false, Squares.NUMBER);
 			board[row][col] = number;
 		} 
+	}
+
+	public Square[][] getBoard() {
+		return board;
+	}
+
+	public void setBoard(Square[][] board) {
+		this.board = board;
 	}
 }
