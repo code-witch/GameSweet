@@ -5,6 +5,7 @@ import java.util.HashMap;
 import gamesweet.base.Game;
 import gamesweet.base.PlayerAmount;
 import gamesweet.minesweeper.controller.Minesweeper;
+import gamesweet.stratego.controller.Stratego;
 import gamesweet.connect4.controllers.ConnectFour;
 
 import javafx.stage.Stage;
@@ -15,18 +16,7 @@ public class Hub {
 
 	public Hub() {
 		gameOptions.put("Connect Four", new ConnectFour(PlayerAmount.TWO));
-		gameOptions.put("Game2", new Game(PlayerAmount.TWO) {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-			}
-
-			@Override
-			public void init(Stage stage, String... playerName) {
-				// TODO Auto-generated method stub
-			}
-		});
+		gameOptions.put("Stratego", new Stratego(PlayerAmount.TWO));
 		gameOptions.put("Game3", new Game(PlayerAmount.ONE) {
 
 			@Override

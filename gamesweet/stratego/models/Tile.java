@@ -7,5 +7,13 @@ public class Tile {
 
     public boolean isOccupied() { return owner != null; }
 
-    //TODO: add getters and setters
+	public Piece getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Piece owner) {
+		this.owner = owner;
+	}
+
+
 }

@@ -8,4 +8,14 @@ public class Flag extends Piece {
     public Flag(String name, int rank){
         super(name,rank);
     }
+
+	public boolean isCaptured() {
+		return isCaptured;
+	}
+
+	public void setCaptured(boolean isCaptured) {
+		this.isCaptured = isCaptured;
+	}
+    
+    
 }
