@@ -20,6 +20,4 @@ public class Board {
 		this.currentTurn = currentTurn;
 	} 
 
-
-
 }
