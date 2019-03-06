@@ -1,24 +1,22 @@
 package gamesweet.stratego.models;
 
 import gamesweet.stratego.enumerations.CharacterType;
+import gamesweet.stratego.enumerations.Color;
 import gamesweet.stratego.enumerations.Direction;
 import gamesweet.stratego.interfaces.Movable;
-import gamesweet.stratego.models.Piece;
 
 public class Character extends Piece implements Movable {
-	private CharacterType type;
+	private final CharacterType type;
+	private final Color color;
 
-	public Character(String name, int rank, CharacterType type) {
+	public Character(String name, int rank, CharacterType type, Color color) {
 		super(name, rank);
 		this.type = type;
+		this.color = color;
 	}
 
 	public CharacterType getType() {
 		return type;
-	}
-
-	public void setType(CharacterType type) {
-		this.type = type;
 	}
 
 	@Override
@@ -35,8 +33,22 @@ public class Character extends Piece implements Movable {
 
 	@Override
 	public void attack(Direction direction, Piece piece) {
+		if (piece.getRank() == -1) {
+			// this is water
+			return;
+		} else if(piece.getRank() == 0) {
+			// this is a flag
+		} else if(piece.getRank() == 1) {
+			// this is a spy
+		}
+		
 		if (piece.getRank() < this.getRank()) {
 			move(direction, 1);
+		} else if(piece.getRank() > this.getRank()) {
+			if (piece instanceof Character) {
+				((Character) piece).move(Direction.reverse(direction), 0);
+			}
+			// this piece dies
 		}
 	}
 
