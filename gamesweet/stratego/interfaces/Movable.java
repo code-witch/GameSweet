@@ -1,6 +1,7 @@
 package gamesweet.stratego.interfaces;
 
 import gamesweet.stratego.enumerations.Direction;
+import gamesweet.stratego.models.Piece;
 
 public interface Movable {
     /**
@@ -12,6 +13,6 @@ public interface Movable {
     /**
      * @param direction = The direction to attack
      */
-    public void attack(Direction direction);
+    public void attack(Direction direction, Piece piece);
 
 }
