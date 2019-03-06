@@ -1,8 +1,11 @@
 package gamesweet.connect4.models;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Leaderboard {
+public class Leaderboard implements Serializable{
+	private static final long serialVersionUID = 5537828521763831851L;
+	
 	private HashMap<String, Player> playersL;
 	
 	public Leaderboard() {
@@ -23,4 +26,5 @@ public class Leaderboard {
 		leads.put(key, player);
 		setPlayersL(leads);
 	}
+	
 }
