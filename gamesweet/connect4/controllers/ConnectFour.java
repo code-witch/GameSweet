@@ -23,15 +23,15 @@ public class ConnectFour extends Game{
 	private String player1;
 	private String player2;
 	private Player[] players = new Player[2];
+	private Player currentP;
 	private Board board;
-	private static int turnCount;
-	private Leaderboard lb = null;
+	public static int turnCount;
+	private Leaderboard lb = new Leaderboard();
 	private boolean containL;
 
 	public void run() {
 //		createPlayers();
-		createBoard(selectDifficulty());
-		playGame();
+//		playGame();
 	}
 	
 	public boolean createSEn(String ID) {
@@ -40,12 +40,16 @@ public class ConnectFour extends Game{
 			createBoard(selectDifficulty());
 			System.out.println("ID is " + ID);
 		}
+//		for (Player p : lb.getPlayersL().values()) {
+//			System.out.println(p);
+//		}
+		saveLeaderboard();
 		return contains;
 	}
 	
 	public void createGEn() {
-		createGuestPlayers();
 		createBoard(selectDifficulty());
+		createGuestPlayers();
 	}
 
 	public void init(Stage primaryStage, String... playerName) {
@@ -58,11 +62,8 @@ public class ConnectFour extends Game{
 	
 	private boolean imCrSavedPlayers(String ID) {
 		boolean contained = false;
-		importLeaderboard();
-		if(getContainL()) {
-			HashMap<String, Player> ps = lb.getPlayersL();
-			contained = ps.containsKey(ID);
-		}
+		HashMap<String, Player> ps = lb.getPlayersL();
+		contained = ps.containsKey(ID);
 		return contained;
 	}
 
@@ -71,11 +72,12 @@ public class ConnectFour extends Game{
 		// Hard-coded names for Guest
 		ArrayList<Chip> chips = new ArrayList<>();
 		for (int i = 0; i < 21; i++) {
-			Chip c = new Chip(ChipColor.BLACK);
+			Chip c = new Chip(ChipColor.YELLOW);
 			chips.add(c);
 		}
-		Player black = new Player(player1, chips);
-		players[0] = black;
+		Player yellow = new Player(player1, chips);
+		players[0] = yellow;
+		System.out.println("Guest 1 created");
 
 		// Hard-coded names for Guest
 		ArrayList<Chip> chips0 = new ArrayList<>();
@@ -84,51 +86,34 @@ public class ConnectFour extends Game{
 			chips0.add(c);
 		}
 		Player red = new Player(player2, chips0);
-		players[0] = red;
+		players[1] = red;
+		System.out.println("Guest 2 created.");
 	}
 
 	private void createBoard(int difficulty) {
-		Space[][] spaces;
+		Chip[][] chips;
 		if (difficulty == 1) {
 			// Easy
-			spaces = new Space[5][4];
-			board = new Board(spaces);
+			chips = new Chip[5][4];
+			board = new Board(chips);
 		} else if (difficulty == 2) {
 			// Normal
-			spaces = new Space[7][6];
-			board = new Board(spaces);
+			chips = new Chip[7][6];
+			board = new Board(chips);
 		} else if (difficulty == 3) {
 			// Challenging
-			spaces = new Space[9][8];
-			board = new Board(spaces);
+			chips = new Chip[9][8];
+			board = new Board(chips);
 		}
 	}
 
-	private void playGame() {
-		do {
-			if (turnCount % 2 == 0) {
-				takeTurn(players[0]);
-				turnCount++;
-			} else if (turnCount % 2 == 1) {
-				takeTurn(players[1]);
-				turnCount++;
-			}
-		} while (!checkForWin());
-		if (turnCount % 2 == 0) {
-			declareWinner(players[1]);
-		} else if (turnCount % 2 == 1) {
-			declareWinner(players[0]);
-		}
 
+	public void takeTurn(Player player) {
+		setCurrentP(player);
 	}
 
-
-	private void takeTurn(Player player) {
-
-	}
-
-	private boolean checkForWin() {
-		return true;
+	public boolean checkForWin() {
+		return false;
 	}
 
 	private void declareWinner(Player player) {
@@ -146,13 +131,12 @@ public class ConnectFour extends Game{
 	}
 
 	private void createLeaderboard() {
-		Leaderboard lb = new Leaderboard();
 		FileOutputStream fileOut = null;
 		ObjectOutputStream out = null;
 		
 		try {
 			// Saving object into a file
-			fileOut = new FileOutputStream("official");
+			fileOut = new FileOutputStream("official.ser");
 			out = new ObjectOutputStream(fileOut);
 			// Serialization of the object
 			out.writeObject(lb);
@@ -169,58 +153,52 @@ public class ConnectFour extends Game{
 		}
 	}
 
+	private void createNewP(Player p) {
+		
+	}
 	
-	private void addToLeaderboard(Player p) {
+	public void addToLeaderboard(Player p) {
 		lb.addPlayer(p);
-		saveLeaderboard(lb.getPlayersL());
+		saveLeaderboard();
 	}
 
 	
-	private void saveLeaderboard(HashMap<String, Player> leaderboard) {
-		lb.setPlayersL(leaderboard);
+	private void saveLeaderboard() {
 		FileOutputStream fileOut = null;
 		ObjectOutputStream out = null;
-		
+
 		try {
 			// Saving object into a file
-			fileOut = new FileOutputStream("official");
+			fileOut = new FileOutputStream("official.ser");
 			out = new ObjectOutputStream(fileOut);
 			// Serialization of the object
 			out.writeObject(lb);
 		} catch (IOException ioe) {
-			System.out.println("Exception is caught");
 		} finally {
 			try {
 			out.close();
 			fileOut.close();
-			System.out.println("Leaderboard created.");
+			System.out.println("Leaderboard saved.");
 			} catch(IOException ioe2) {
-				System.out.println("Exception is caught");
 			}
 		}
-	}
-
-//	private void printLeaderboard() {
-//
-//	}
+	}	
 	
-	
-	private void importLeaderboard() {
+	public void importLeaderboard() {
 		FileInputStream fileIn = null;
 		ObjectInputStream in = null;
 		boolean needCre = false;
 		
 		try {
 			// Reading the object from a file
-			fileIn = new FileInputStream("official");
+			fileIn = new FileInputStream("official.ser");
 			in = new ObjectInputStream(fileIn);
 
 			// Deserialization of the object
 			lb = (Leaderboard) in.readObject();
-			System.out.println(lb);
 			
 		} catch (IOException ioe) {
-			System.out.println("Exception is caught");
+			System.out.println("");
 		} catch (ClassNotFoundException ex) {
 			System.out.println("ClassNotFoundException is caught.");
 			needCre = true;
@@ -228,14 +206,14 @@ public class ConnectFour extends Game{
 			try {
 			in.close();
 			fileIn.close();
-			System.out.println("Deserialization completed.");
+			System.out.println("Import.");
 			} catch(IOException ioe2) {
-				System.out.println("Exception is caught");
 			} catch(NullPointerException npe) {
 				needCre = true;
 			}
 		}
 		if(needCre) {
+			System.out.println("Needed Creation");
 			createLeaderboard();
 			setContainL(true);
 			needCre = false;
@@ -250,4 +228,28 @@ public class ConnectFour extends Game{
 		this.containL = containL;
 	}
 	
+	public int getValue(String column) {
+		
+		return 0;
+	}
+	
+	public Leaderboard getLeaderB() {
+		return lb;
+	}
+	
+	public Board getBoard() {
+		return board;
+	}
+	
+	public Player getCurrentP() {
+		return currentP;
+	}
+	
+	public void setCurrentP(Player currentP) {
+		this.currentP = currentP;
+	}
+	
+	public Player[] getPlayers() {
+		return players;
+	}
 }
