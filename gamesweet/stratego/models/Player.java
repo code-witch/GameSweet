@@ -31,7 +31,7 @@ public class Player {
 		pieces[0][0] = new Character("Spy", 1, color, CharacterType.SPY);
 		pieces[0][1] = new Flag("Flag", 0, color);
 		pieces[0][2] = new Character("Marshal", 10, color, CharacterType.MARSHAL);
-		pieces[0][3] = new Character("General",9,color,null);
+		pieces[0][3] = new Character("General",9,color,CharacterType.GENERAL);
 		
 		pieces[0][4] = new Character("Colonel",8,color,CharacterType.COLONEL);
 		pieces[0][5] = new Character("Colonel",8,color,CharacterType.COLONEL);
@@ -79,8 +79,6 @@ public class Player {
 		
 	}
 
-//	Bomb (6x)
-//	Scout (8x)
 
 
 
