@@ -21,6 +21,12 @@ public class Stratego extends Game {
 		playerOne = new Player(playerName[0], Color.RED);
 		playerTwo = new Player(playerName[1], Color.BLUE);
 		board.setBoard(new Tile[10][10]);
+		Tile[][] t = board.getBoard();
+		for (int i = 0; i < t.length; i++) {
+			for(int j = 0; j < t[i].length; j++) {
+				t[i][j] = new Tile();
+			}
+		}
 		initCharacters();
 	}
 
@@ -30,7 +36,7 @@ public class Stratego extends Game {
 	}
 
 	private void initCharacters() {
-		board.getBoard()[0][0].setOwner(new Character("Spy", 1, CharacterType.SPY, Color.RED));
+				
 	}
 
 }

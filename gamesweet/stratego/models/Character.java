@@ -7,12 +7,10 @@ import gamesweet.stratego.interfaces.Movable;
 
 public class Character extends Piece implements Movable {
 	private final CharacterType type;
-	private final Color color;
 
-	public Character(String name, int rank, CharacterType type, Color color) {
-		super(name, rank);
+	public Character(String name, int rank, Color color, CharacterType type) {
+		super(name, rank, color);
 		this.type = type;
-		this.color = color;
 	}
 
 	public CharacterType getType() {
