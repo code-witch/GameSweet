@@ -11,6 +11,7 @@ public class Player {
     public Player(String name, Color color){
         this.name = name;
         this.color = color;
+        initPieces();
     }
     
     public void takeTurn() { }

@@ -27,16 +27,26 @@ public class Stratego extends Game {
 				t[i][j] = new Tile();
 			}
 		}
-		initCharacters();
+		initBoard();
 	}
 
 	@Override
 	public void run() {
-
+		
 	}
 
-	private void initCharacters() {
-				
+	public void initBoard() {
+		for(int i = 0; i < 4;i++) {
+			for(int j = 0; j < 10; j++) {
+				board.getBoard()[i][j].setOwner(playerOne.getPieces()[i][j]);
+			}
+		}	
+		
+		for(int i = 0; i < 4; i++) {
+			for(int j = 0; j < 10; j++) {
+				board.getBoard()[i+6][j].setOwner(playerTwo.getPieces()[i][j]);
+			}
+		}
 	}
-
+	
 }
