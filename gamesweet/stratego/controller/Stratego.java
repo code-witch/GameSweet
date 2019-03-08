@@ -28,11 +28,17 @@ public class Stratego extends Game {
 			}
 		}
 		initBoard();
+		
+		run();
 	}
 
 	@Override
 	public void run() {
-		
+		for(Tile[] t: board.getBoard()) {
+			for (Tile tt: t) {
+				System.out.println(tt.getOwner());
+			}
+		}
 	}
 
 	public void initBoard() {
@@ -41,7 +47,6 @@ public class Stratego extends Game {
 				board.getBoard()[i][j].setOwner(playerOne.getPieces()[i][j]);
 			}
 		}	
-		
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 10; j++) {
 				board.getBoard()[i+6][j].setOwner(playerTwo.getPieces()[i][j]);
