@@ -9,5 +9,13 @@ public class Bomb extends Piece {
         super(name,rank);
     }
 
-    // TODO: add getter and setters
+	public boolean isDefused() {
+		return isDefused;
+	}
+
+	public void setDefused(boolean isDefused) {
+		this.isDefused = isDefused;
+	}
+    
+    
 }

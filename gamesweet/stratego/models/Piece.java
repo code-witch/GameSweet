@@ -9,5 +9,11 @@ public abstract class Piece {
         this.rank = rank;
     }
 
-    // TODO: add getters
+	public String getName() {
+		return name;
+	}
+
+	public int getRank() {
+		return rank;
+	}
 }
