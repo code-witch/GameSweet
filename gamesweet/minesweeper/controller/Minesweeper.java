@@ -15,14 +15,15 @@ public class Minesweeper extends Game{
 
 	@Override
 	public void run() {
+		
 	}
 
 
 	@Override
 	public void init(Stage stage, String... playerName) {
-		Board board = new Board();
-		board.setUpBoard();
-		GUI.run(stage, board);
+		GUI gui = new GUI();
+		gui.run(stage);
 		run();
 	}
 }
+
