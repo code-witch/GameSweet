@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -37,10 +38,12 @@ import javafx.util.Callback;
 public class GUI {
 	static ConnectFour game = new ConnectFour(PlayerAmount.TWO);
 	static Scene[] scenes = new Scene[2];
+
 	private static final int SIZE = 80;
 	private static int turnCount = 0;
 
 	public static GridPane run(Stage stage) {
+		scenes[1] = gamesweet.hub.App.gameSelection;
 		GridPane grid = new GridPane();
 		try {
 			Label btn = new Label();
@@ -55,11 +58,13 @@ public class GUI {
 			Button savedU = new Button("Returning Player");
 			Button newP = new Button("Add New Player");
 			Button leaderboard = new Button("Leaderboard");
+			Button back = new Button("Back");
 			grid.add(guest, 1, 1);
 			grid.add(savedU, 1, 2);
 			grid.add(newP, 1, 3);
 			grid.add(leaderboard, 1, 4);
-			
+			grid.add(back, 1, 5);
+
 			leaderboard.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -111,6 +116,17 @@ public class GUI {
 				}
 
 			});
+			back.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					gamesweet.hub.App.playerLayout.getChildren().removeAll(gamesweet.hub.App.playerOne,
+							gamesweet.hub.App.playerTwo);
+					stage.setScene(scenes[1]);
+					stage.show();
+				}
+
+			});
 
 			// How to set the Scene
 
@@ -133,7 +149,7 @@ public class GUI {
 
 	private static GridPane play(Stage stage) {
 		GridPane grid = new GridPane();
-		
+
 		int columns = 7;
 		int rows = 6;
 
@@ -149,7 +165,7 @@ public class GUI {
 		grid.setVgap(5);
 		grid.setHgap(5);
 
-		GridPane.setConstraints(board, 5, 11, columns*2, rows);
+		GridPane.setConstraints(board, 5, 11, columns * 2, rows);
 
 		for (int i = 0; i < columns; i++) {
 			GridPane.setConstraints(overlay.get(i), 5, 11);
@@ -183,17 +199,29 @@ public class GUI {
 		});
 		for (int i = 0; i < columns; i++) {
 			int j = i;
-			overlay.get(i).setOnMouseClicked(e -> {
-				playGame();
-				final Circle c = placeChip(game.getCurrentP(), j, rows);
-				grid.add(c, 5, 11);
+				try {
+				overlay.get(i).setOnMouseClicked(e -> {
+						playGame();
+						final Circle c = placeChip(game.getCurrentP(), j, rows);
+						grid.add(c, 5, 11);
+						if(checkForWin()) {
+							Alert done = new Alert(AlertType.CONFIRMATION);
+							done.setContentText(game.getWinner() + " wins!");
+							done.showAndWait();
+							stage.setScene(scenes[0]);
+							stage.setTitle("GameSweet - Connect Four");
+							stage.show();
+						}
 				});
+			} catch (NullPointerException npe) {
+				turnCount--;
+			}
+			
 		}
 //		overlay.get(0).setOnMouseClicked(e -> placeChip(game.getCurrentP(), 0, rows));
 //		overlay.get(0).setOnMouseClicked(e -> overlay.get(0).setFill(Color.rgb(34, 139, 34, 0.4)));
 
-		
-		//Add if statement for other levels of difficulties
+		// Add if statement for other levels of difficulties
 		grid.getChildren().addAll(board, overlay.get(0), overlay.get(1), overlay.get(2), overlay.get(3), overlay.get(4),
 				overlay.get(5), overlay.get(6), lb, back);
 		return grid;
@@ -431,70 +459,74 @@ public class GUI {
 	}
 
 	private static Circle placeChip(Player p, int column, int rows) {
-		//Remember it's an array so it would check the number of rows - 1
-		int row = rows - 1;		
+		// Remember it's an array so it would check the number of rows - 1
+		int row = rows - 1;
 		boolean success = false;
-		
+
 		Circle circle = null;
-		
+
 		Chip[][] chips = game.getBoard().getChips();
-		Chip c = p.getChips().get(p.getChips().size()-1);
-		
+		Chip c = p.getChips().get(p.getChips().size() - 1);
+
 //		Chip c = new Chip(ChipColor.RED);
 		do {
-			if(chips[column][row] == null && row >= 0) {
+			if (chips[column][row] == null && row >= 0) {
 				chips[column][row] = c;
 				p.removeChip();
 				success = true;
 				break;
 			}
-			row --;
-		} while(row >= 0);
-		
-		int[] spot = {column, row};
-		
-		if(success) {
+			row--;
+		} while (row >= 0);
+
+		int[] spot = { column, row };
+
+		if (success) {
 			int size = SIZE / 2;
 			circle = new Circle(size);
 			circle.setCenterX(size);
 			circle.setCenterY(size);
 			circle.setTranslateX(column * (SIZE + 5) + SIZE / 4);
-			circle.setTranslateY((row * (SIZE + 5) + SIZE / 4) - ((SIZE * 2) + 67));	
-			
+			circle.setTranslateY((row * (SIZE + 5) + SIZE / 4) - ((SIZE * 2) + 67));
+
 			circle.setFill(Color.AQUA);
-			
+
 			if (p.getChips().get(0).getChipColor() == ChipColor.RED) {
 				circle.setFill(Color.RED);
 			} else if (p.getChips().get(0).getChipColor() == ChipColor.YELLOW) {
 				circle.setFill(Color.YELLOW);
-			} 
+			}
 		}
-		
+
 		return circle;
 	}
-	
+
 	private static void playGame() {
 		Player[] players = game.getPlayers();
-		do {
-			if (turnCount % 2 == 0) {
-				game.takeTurn(players[0]);
-				turnCount++;
-				break;
-			} else if (turnCount % 2 == 1) {
-				game.takeTurn(players[1]);
-				turnCount++;
-				break;
-			}
-		} while (!game.checkForWin());
 		if (turnCount % 2 == 0) {
-//			declareWinner(players[1]);
-			System.out.println("Player 2 Wins");
+			game.takeTurn(players[0]);
+			turnCount++;
 		} else if (turnCount % 2 == 1) {
-//			declareWinner(players[0]);
-			System.out.println("Player 1 Wins");
-
+			game.takeTurn(players[1]);
+			turnCount++;
 		}
-
+	}
+	
+	private static boolean checkForWin() {
+		Player[] players = game.getPlayers();
+		Chip c = game.getCurrentP().getChips().get(0);
+		boolean stopP = false;
+		if (game.checkForWin(game.getPlayers()[0], c)) {
+			game.declareWinner(players[0]);
+			game.setWinenr(players[0].getName());
+			stopP = true;
+		} else if (game.checkForWin(game.getPlayers()[1], c)) {
+			game.declareWinner(players[1]);
+			game.setWinenr(players[1].getName());
+			stopP = true;
+		}
+		return stopP;
+		
 	}
 
 }
