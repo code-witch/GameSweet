@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class Stratego extends Game {
 	private Player playerOne, playerTwo;
 	private Board board = new Board();
-	private GUI gui = new GUI();
+	private GUI gui;
 	
 	public Stratego(PlayerAmount playerAmount) {
 		super(playerAmount);
@@ -19,6 +19,7 @@ public class Stratego extends Game {
 
 	@Override
 	public void init(Stage stage, String... playerName) {
+		gui = new GUI();
 		playerOne = new Player(playerName[0], Color.RED);
 		playerTwo = new Player(playerName[1], Color.BLUE);
 		board.setBoard(new Tile[10][10]);
@@ -29,7 +30,7 @@ public class Stratego extends Game {
 			}
 		}
 		initBoard();
-		gui.init(stage,board);
+		gui.init(stage,board,playerOne,playerTwo);
 		run();
 	}
 
