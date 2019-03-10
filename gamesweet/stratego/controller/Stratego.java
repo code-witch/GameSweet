@@ -30,7 +30,7 @@ public class Stratego extends Game {
 			}
 		}
 		initBoard();
-		gui.init(stage,board,playerOne,playerTwo);
+		gui.init(stage,board);
 		run();
 	}
 
