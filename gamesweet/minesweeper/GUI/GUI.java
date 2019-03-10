@@ -4,7 +4,7 @@ import gamesweet.minesweeper.enumpkg.Squares;
 import gamesweet.minesweeper.model.Board;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -31,8 +31,10 @@ public class GUI {
 	private Board gameBoard = new Board();
 	private Button[][] gridArray;
 	private static Stage newStage;
-//	private final Integer starttime = 0;
+	private Button faceButton = new Button();
+	private Timeline timeLine;
 	private Integer seconds;
+	private Label timerLabel = new Label();
 
 	public void run(Stage primaryStage) {
 		try {
@@ -59,29 +61,33 @@ public class GUI {
 
 			Menu helpMenu = new Menu("Help");
 			MenuItem h2P = new MenuItem("How to Play");
-			h2P.setOnAction(e -> AlertBox.display());
+			h2P.setOnAction(e -> AlertBox
+					.display(" The objective of the game is to clear a rectangular board containing hidden "
+							+ "'mines' \n or bombs without detonating any of them, with help from clues about"
+							+ " \n the number of neighboring mines in each field. "));
 			helpMenu.getItems().addAll(h2P, new MenuItem("Go back to HUB"));
 
 			MenuBar menuBar = new MenuBar();
 			menuBar.getMenus().addAll(gameMenu, helpMenu);
 
 			// Set up the smileyface button
-			Button smileyButton = new Button();
 			Image smileyFace = new Image(getClass().getResourceAsStream("smiley.png"));
-			ImageView smile = new ImageView(smileyFace);
-			smile.setFitHeight(30);
-			smile.setFitWidth(30);
-			smileyButton.setGraphic(smile);
-			smileyButton.setOnAction(e -> smileyReset());
+			ImageView smileView = new ImageView(smileyFace);
+			smileView.setFitHeight(40);
+			smileView.setFitWidth(40);
+			faceButton.setGraphic(smileView);
+			faceButton.setOnAction(e -> smileyReset());
 
-			Label timer = new Label();
-			timer.setPrefSize(50, 100);
-			timer.setFont(Font.font(30));
-			timer.setTextFill(Color.RED);
-			
-			Button score = new Button("Mines");
-			score.setAlignment(Pos.CENTER_LEFT);
-			bar.getChildren().addAll(score, smileyButton, timer);
+			timerLabel.setPrefSize(50, 100);
+			timerLabel.setFont(Font.font(30));
+			timerLabel.setStyle("-fx-font-family:monospace");
+			timerLabel.setTextFill(Color.RED);
+
+			Label score = new Label();
+			score.setPrefSize(100, 100);
+			score.setFont(Font.font(20));
+
+			bar.getChildren().addAll(score, faceButton, timerLabel);
 			bar.setAlignment(Pos.CENTER);
 
 			// Set up Grid
@@ -104,10 +110,30 @@ public class GUI {
 								MouseButton leftClick = event.getButton();
 								MouseButton rightClick = event.getButton();
 								if (leftClick == MouseButton.PRIMARY) {
-									System.out.println("Game over");
+									for (int i = 0; i < gameBoard.getBoard().length; i++) {
+										for (int j = 0; j < gameBoard.getBoard()[0].length; j++) {
+											gridArray[i][j].setDisable(true);
+											if (gameBoard.getBoard()[i][j].getSquareType() == Squares.MINE) {
+												Image mineImage = new Image(getClass().getResourceAsStream("mine.png"));
+												ImageView mineView = new ImageView(mineImage);
+												mineView.setFitHeight(20);
+												mineView.setFitWidth(20);
+												gridArray[i][j].setGraphic(mineView);
+											}
+										}
+									}
+									Image sadFace = new Image(getClass().getResourceAsStream("dead.png"));
+									ImageView sadView = new ImageView(sadFace);
+									sadView.setFitHeight(40);
+									sadView.setFitWidth(40);
+									faceButton.setGraphic(sadView);
+									AlertBox.display(
+											" Game Over! YOU LOSE \n Press the Face or \n Change the Difficulty to Reset");
 								}
 								if (rightClick == MouseButton.SECONDARY) {
 									System.out.println("Flaged square");
+									gameBoard.setMines(gameBoard.getMines() - 1);
+									score.setText("Mines: " + gameBoard.getMines());
 								}
 							}
 						});
@@ -128,11 +154,15 @@ public class GUI {
 									String num = "" + gameBoard.getBoard()[y][x].getMineAmount();
 									number.setText(num);
 									number.setDisable(true);
+									checkForWin();
 								}
 								if (rightClick == MouseButton.SECONDARY) {
-									System.out.println("Flaged square");
+									System.out.println("Flagged");
+									gameBoard.setMines(gameBoard.getMines() - 1);
+									score.setText("Mines: " + gameBoard.getMines());
 								}
 							}
+
 						});
 					}
 
@@ -140,7 +170,7 @@ public class GUI {
 					if (gameBoard.getBoard()[row][col].getSquareType() == Squares.EMPTY) {
 						Button empty = new Button();
 						empty.setPrefSize(50, 50);
-						empty.setStyle("-fx-background-color : grey");
+//						empty.setStyle("-fx-background-color : grey");
 						gridArray[row][col] = empty;
 						grid.add(empty, col, row);
 						empty.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -151,9 +181,12 @@ public class GUI {
 								if (leftClick == MouseButton.PRIMARY) {
 									empty.setDisable(true);
 									revealSquare(gridArray, gameBoard, x, y);
+									checkForWin();
 								}
 								if (rightClick == MouseButton.SECONDARY) {
 									System.out.println("Flaged square");
+									gameBoard.setMines(gameBoard.getMines() - 1);
+									score.setText("Mines: " + gameBoard.getMines());
 								}
 							}
 						});
@@ -165,17 +198,20 @@ public class GUI {
 			grid.setPadding(new Insets(15, 0, 0, 0));
 			vBox.getChildren().addAll(menuBar, bar, grid);
 			if (gridArray[0].length == 9) {
-				bar.setMargin(smileyButton, new Insets(0, 120, 0, 120));
-				currentScene = new Scene(vBox, 400, 440);
-				doTime(timer);
+				bar.setMargin(faceButton, new Insets(0, 90, 0, 90));
+				score.setText("Mines: " + gameBoard.getMines());
+				doTime(timerLabel);
+				currentScene = new Scene(vBox, 430, 500);
 			} else if (gridArray[0].length == 16) {
-				currentScene = new Scene(vBox, 800, 800);
-				bar.setMargin(smileyButton, new Insets(0, 310, 0, 310));
-				doTime(timer);
+				bar.setMargin(faceButton, new Insets(0, 270, 0, 270));
+				score.setText("Mines: " + gameBoard.getMines());
+				doTime(timerLabel);
+				currentScene = new Scene(vBox, 800, 810);
 			} else if (gridArray[0].length == 30) {
-				currentScene = new Scene(vBox, 1300, 800);
-				bar.setMargin(smileyButton, new Insets(0, 560, 0, 560));
-				doTime(timer);
+				bar.setMargin(faceButton, new Insets(0, 550, 0, 550));
+				score.setText("Mines: " + gameBoard.getMines());
+				doTime(timerLabel);
+				currentScene = new Scene(vBox, 1400, 900);
 			}
 
 			primaryStage.setScene(currentScene);
@@ -188,25 +224,78 @@ public class GUI {
 	}
 
 	private void doTime(Label lb) {
+		if (timeLine != null) {
+			timeLine.stop();
+		}
 		seconds = 0;
-		Timeline time = new Timeline();
-		KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+		timerLabel.setText(seconds.toString());
+		timeLine = new Timeline();
+		timeLine.setCycleCount(Timeline.INDEFINITE);
+		timeLine.getKeyFrames().add(new KeyFrame(Duration.seconds(1), new EventHandler() {
 			@Override
-			public void handle(ActionEvent event) {
-				seconds++;
-				lb.setText("" + seconds.toString());
-				if (seconds >= 999) {
-					time.stop();
+			public void handle(Event arg0) {
+				seconds += 1;
+				timerLabel.setText(seconds.toString());
+				if (seconds == 999) {
+					timeLine.stop();
+				}
+
+			}
+		}));
+		timeLine.playFromStart();
+	}
+
+	private void checkForWin() {
+		boolean winGame = false;
+		int revealedSquares = 0;
+		for (int i = 0; i < gridArray.length; i++) {
+			for (int j = 0; j < gridArray[0].length; j++) {
+				if (gridArray[0].length == 9) {
+					if (gameBoard.getBoard()[i][j].getSquareType() != Squares.MINE
+							&& gridArray[i][j].isDisable() == true) {
+						revealedSquares += 1;
+						if (revealedSquares == 71) {
+							timeLine.stop();
+							winFace();
+						}
+					}
+				} else if (gridArray[0].length == 16) {
+					if (gameBoard.getBoard()[i][j].getSquareType() != Squares.MINE
+							&& gridArray[i][j].isDisable() == true) {
+						revealedSquares += 1;
+						if (revealedSquares == 216) {
+							timeLine.stop();
+							winFace();
+						}
+					}
+				} else if (gridArray[0].length == 381) {
+					if (gameBoard.getBoard()[i][j].getSquareType() != Squares.MINE
+							&& gridArray[i][j].isDisable() == true) {
+						revealedSquares += 1;
+						if (revealedSquares == 71) {
+							timeLine.stop();
+							winFace();
+						}
+					}
 				}
 			}
-		});
-		time.setCycleCount(Timeline.INDEFINITE);
-		time.getKeyFrames().add(frame);
-		if (time != null) {
-			time.stop();
 		}
-		time.play();
+	}
 
+	private void winFace() {
+		for(int i = 0; i < gridArray.length; i++) {
+			for(int j = 0; j < gridArray[i].length; j++) {
+				if(gameBoard.getBoard()[i][j].getSquareType() == Squares.MINE) {
+					gridArray[i][j].setDisable(true);
+				}
+			}
+		}
+		Image winFace = new Image(getClass().getResourceAsStream("win.png"));
+		ImageView winView = new ImageView(winFace);
+		winView.setFitHeight(40);
+		winView.setFitWidth(40);
+		faceButton.setGraphic(winView);
+		AlertBox.display(" Game Over! YOU WIN! \n Press the Face or \n Change the Difficulty to Reset");
 	}
 
 	private void smileyReset() {
