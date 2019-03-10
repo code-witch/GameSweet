@@ -29,28 +29,36 @@ public class ConnectFour extends Game {
 	public static int turnCount;
 	private Leaderboard lb = new Leaderboard();
 	private boolean containL;
+	private int[] setUp = {7, 6};
 
 	public void run() {
 //		createPlayers();
 //		playGame();
 	}
 
-	public boolean createSEn(String ID) {
+	public boolean createSEn(String ID, int index, boolean created) {
 		boolean contains = imCrSavedPlayers(ID);
 		if (contains) {
 			createBoard(selectDifficulty());
 			System.out.println("ID is " + ID);
+			if(created) {
+				HashMap<String, Player> ps = lb.getPlayersL();
+				Player p = ps.get(ID);
+				createNewP(p, index);
+			}
+			
 		}
 //		for (Player p : lb.getPlayersL().values()) {
 //			System.out.println(p);
 //		}
 		saveLeaderboard();
+		
 		return contains;
 	}
 
-	public void createGEn() {
+	public void createGEn(int index) {
 		createBoard(selectDifficulty());
-		createGuestPlayers();
+		createGuestPlayer(index);
 	}
 
 	public void init(Stage primaryStage, String... playerName) {
@@ -66,28 +74,29 @@ public class ConnectFour extends Game {
 		return contained;
 	}
 
-	private void createGuestPlayers() {
-		// Hard-coded names for Guest
-		ArrayList<Chip> chips = new ArrayList<>();
+	private void createGuestPlayer(int index) {
+		
+		if(index == 1) {
+			ArrayList<Chip> chips = new ArrayList<>();
 		for (int i = 0; i < 22; i++) {
 			Chip c = new Chip(ChipColor.YELLOW);
 			chips.add(c);
 		}
 		Player yellow = new Player(getPlayer1N(), chips);
-//		yellow.setName(player1);
 		players[0] = yellow;
 		System.out.println("Guest 1 created");
-
-		// Hard-coded names for Guest
-		ArrayList<Chip> chips0 = new ArrayList<>();
+		
+		} else if (index == 2) {
+			ArrayList<Chip> chips0 = new ArrayList<>();
 		for (int i = 0; i < 22; i++) {
 			Chip c = new Chip(ChipColor.RED);
 			chips0.add(c);
 		}
 		Player red = new Player(getPlayer2N(), chips0);
-//		red.setName(player2);
 		players[1] = red;
 		System.out.println("Guest 2 created.");
+		
+		}		
 	}
 
 	private void createBoard(int difficulty) {
@@ -118,8 +127,8 @@ public class ConnectFour extends Game {
 		// Checks if there is a connect four vertically.
 		if (p != null && c != null) {
 			while (!winner) {
-				for (int x = 0; x < 6; x++) {
-					for (int y = 0; y < 7; y++) {
+				for (int x = 0; x < cs[0].length; x++) {
+					for (int y = 0; y < cs.length; y++) {
 						if (cs[y][x] == null) {
 							counter = 0;
 						} else {
@@ -142,8 +151,8 @@ public class ConnectFour extends Game {
 
 			// Checks if there is a connect four horizontally
 			while (!winner) {
-				for (int y = 0; y < 7; y++) {
-					for (int x = 0; x < 6; x++) {
+				for (int y = 0; y < cs.length; y++) {
+					for (int x = 0; x < cs[0].length; x++) {
 						if (cs[y][x] == null) {
 							counter = 0;
 						} else {
@@ -169,8 +178,8 @@ public class ConnectFour extends Game {
 			int checkC = 1;
 			int checkR = 1;
 			while (!winner) {
-				for (int y = 0; y < 7; y++) {
-					for (int x = 0; x < 6; x++) {
+				for (int y = 0; y < cs.length; y++) {
+					for (int x = 0; x < cs[0].length; x++) {
 						checkC = 1;
 						checkR = 1;
 						counter = 0;
@@ -193,7 +202,7 @@ public class ConnectFour extends Game {
 									checkC++;
 									checkR++;
 
-									if (checkC == 6 || checkR == 5) {
+									if (checkC == cs.length - 1 || checkR == cs[0].length - 1) {
 										check = false;
 										winner = false;
 										break;
@@ -227,8 +236,8 @@ public class ConnectFour extends Game {
 				checkC = 1;
 				checkR = 1;
 				while (!winner) {
-					for (int y = 0; y < 7; y++) {
-						for (int x = 0; x < 6; x++) {
+					for (int y = 0; y < cs.length; y++) {
+						for (int x = 0; x < cs[0].length; x++) {
 							counter = 0;
 							checkC = 1;
 							checkR = 1;
@@ -241,8 +250,8 @@ public class ConnectFour extends Game {
 									counter++;
 									check = true;
 									do {
-										if ((((y - checkC) >= 0) && (y - checkC < 7)) && ((x - checkR) >= 0)
-												&& (x - checkR < 6)) {
+										if ((((y - checkC) >= 0) && (y - checkC < cs.length)) && ((x - checkR) >= 0)
+												&& (x - checkR < cs[0].length)) {
 											if (cs[y - checkC][x - checkR] != null) {
 												if (cs[y - checkC][x - checkR].getChipColor() == c.getChipColor()) {
 													counter++;
@@ -287,14 +296,16 @@ public class ConnectFour extends Game {
 		// This winner wins!!
 	}
 
-	private void resetGame() {
-		// Clear everything and restart game.
-		// Button at the top of the ribbon to be clicked anytime.
-	}
-
 	private int selectDifficulty() {
-		// Logic to allow users to input difficulty
-		return 2;
+		int diff = 0;
+		if(getSetUp()[0] == 5) {
+			diff = 1;
+		} else if (getSetUp()[0] == 7) {
+			diff = 2;
+		} else if(getSetUp()[0] == 9) {
+			diff = 3;
+		}
+		return diff;
 	}
 
 	private void createLeaderboard() {
@@ -320,8 +331,30 @@ public class ConnectFour extends Game {
 		}
 	}
 
-	private void createNewP(Player p) {
-
+	private void createNewP(Player p, int index) {
+		
+		if(index == 1) {
+			ArrayList<Chip> chips = new ArrayList<>();
+		for (int i = 0; i < 22; i++) {
+			Chip c = new Chip(ChipColor.YELLOW);
+			chips.add(c);
+		}
+		p.setChips(chips);
+		players[0] = p;
+		System.out.println("Saved User 1 created");
+		
+		} else if (index == 2) {
+			ArrayList<Chip> chips0 = new ArrayList<>();
+		for (int i = 0; i < 22; i++) {
+			Chip c = new Chip(ChipColor.RED);
+			chips0.add(c);
+		}
+		p.setChips(chips0);
+		players[1] = p;
+		System.out.println("Saved User 2 created.");
+		
+		}
+		saveLeaderboard();
 	}
 
 	public void addToLeaderboard(Player p) {
@@ -329,7 +362,7 @@ public class ConnectFour extends Game {
 		saveLeaderboard();
 	}
 
-	private void saveLeaderboard() {
+	public void saveLeaderboard() {
 		FileOutputStream fileOut = null;
 		ObjectOutputStream out = null;
 
@@ -394,11 +427,6 @@ public class ConnectFour extends Game {
 		this.containL = containL;
 	}
 
-	public int getValue(String column) {
-
-		return 0;
-	}
-
 	public Leaderboard getLeaderB() {
 		return lb;
 	}
@@ -445,5 +473,13 @@ public class ConnectFour extends Game {
 
 	public void setWinenr(String winner) {
 		this.winner = winner;
+	}
+	
+	public int[] getSetUp() {
+		return setUp;
+	}
+	
+	public void setSetUp(int[] setUp) {
+		this.setUp = setUp;
 	}
 }
