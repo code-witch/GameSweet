@@ -5,10 +5,12 @@ import gamesweet.minesweeper.enumpkg.Squares;
 public class Square {
 	private boolean isRevealed;
 	private Squares squareType;
+	private int mineAmount;
 	
-	public Square(boolean isRevealed, Squares squareType) {
-		this.setRevealed(isRevealed);
-		this.setSquareType(squareType);
+	public Square(boolean isRevealed, Squares squareType, int mineAmount) {
+		setRevealed(isRevealed);
+		setSquareType(squareType);
+		setMineAmount(mineAmount);
 	}
 
 	public boolean isRevealed() {
@@ -25,6 +27,14 @@ public class Square {
 
 	public void setSquareType(Squares squareType) {
 		this.squareType = squareType;
+	}
+
+	public int getMineAmount() {
+		return mineAmount;
+	}
+
+	public void setMineAmount(int mineAmount) {
+		this.mineAmount = mineAmount;
 	}
 	
 }
