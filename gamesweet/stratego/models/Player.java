@@ -1,5 +1,8 @@
 package gamesweet.stratego.models;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import gamesweet.stratego.enumerations.CharacterType;
 import gamesweet.stratego.enumerations.Color;
 
@@ -78,6 +81,20 @@ public class Player {
 		pieces[3][8] = new Bomb("B",100,color);
 		pieces[3][9] = new Bomb("B",100,color);
 		
+		ArrayList<Piece> al = new ArrayList<>();
+		for(int i = 0; i < pieces.length;i++) {
+			for(int j = 0; j < pieces[i].length; j++) {
+				al.add(pieces[i][j]);
+			}
+		}
+		Collections.shuffle(al);
+		int counter = 0;
+		for(int i = 0; i < pieces.length;i++) {
+			for(int j = 0; j < pieces[i].length; j++) {
+				pieces[i][j] = al.get(counter);
+				counter++;
+			}
+		}
 	}
 
 

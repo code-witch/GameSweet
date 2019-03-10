@@ -67,6 +67,8 @@ public class GUI {
 				currentPane.y = source.y;
 				source.x = x;
 				source.y = y;
+				grid[currentPane.x][currentPane.y] = currentPane;
+				grid[source.x][source.y] = source;
 				gp.add(currentPane,currentPane.x,currentPane.y);
 				gp.add(source, source.x, source.y);
 				currentPane = null;
