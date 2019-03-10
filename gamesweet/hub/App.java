@@ -16,13 +16,13 @@ import javafx.stage.Stage;
 public class App extends Application {
 
 	Hub hub = new Hub();
-	GridPane gp = new GridPane();
-	Scene gameSelection = new Scene(gp);
+	static GridPane gp = new GridPane();
+	public static Scene gameSelection = new Scene(gp);
 	Button submit = new Button("Submit");
 	Button back = new Button("Back");
-	TextField playerOne;
-	TextField playerTwo;
-	VBox playerLayout = new VBox();
+	public static TextField playerOne;
+	public static TextField playerTwo;
+	public static VBox playerLayout = new VBox();
 	Scene playerScene = new Scene(playerLayout);	
 	
 

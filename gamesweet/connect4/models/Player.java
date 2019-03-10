@@ -12,11 +12,13 @@ public class Player implements Serializable{
 	private int wins;
 	private int losses;
 	private String slogan;
+	private boolean saved;
 	
 	public Player(String name, ArrayList<Chip> chips) {
 		setName(name);
 		setChips(chips);
 		setID("Guest");
+		setSaved(false);
 		
 	}
 	
@@ -26,6 +28,7 @@ public class Player implements Serializable{
 		setWins(0);
 		setLosses(0);
 		setSlogan(slogan);
+		setSaved(true);
 	}
 	
 	public ArrayList<Chip> getChips() {
@@ -70,6 +73,14 @@ public class Player implements Serializable{
 		ArrayList<Chip> chips = getChips();
 		chips.remove(c-1);
 		setChips(chips);
+	}
+	
+	public boolean getSaved() {
+		return saved;
+	}
+	
+	public void setSaved(boolean saved) {
+		this.saved = saved;
 	}
 	@Override
 	public String toString() {
