@@ -1,18 +1,20 @@
 package gamesweet.connect4.models;
 
 public class Board {
-	private Space[][] spaces;
+	private Chip[][] chips;
 	
-	public Board(Space[][] spaces) {
-		setSpaces(spaces);
+	public Board(Chip[][] chips) {
+		setChips(chips);
 	}
 
-	public Space[][] getSpaces() {
-		return spaces;
+	public Chip[][] getChips() {
+		return chips;
 	}
 
-	public void setSpaces(Space[][] spaces) {
-		this.spaces = spaces;
+	public void setChips(Chip[][] chips) {
+		this.chips = chips;
 	}
+
+
 	
 }

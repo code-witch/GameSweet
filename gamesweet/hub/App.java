@@ -9,18 +9,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class App extends Application {
 
 	Hub hub = new Hub();
-	GridPane gp = new GridPane();
-	Scene gameSelection = new Scene(gp);
+	static GridPane gp = new GridPane();
+	public static Scene gameSelection = new Scene(gp);
 	Button submit = new Button("Submit");
-	TextField playerOne;
-	TextField playerTwo;
-	VBox playerLayout = new VBox();
+	Button back = new Button("Back");
+	public static TextField playerOne;
+	public static TextField playerTwo;
+	public static VBox playerLayout = new VBox();
 	Scene playerScene = new Scene(playerLayout);	
 	
 
@@ -78,13 +80,23 @@ public class App extends Application {
 							 }
 						 });
 					}
+		
 					
-					playerLayout.getChildren().add(submit);
+					
+					HBox hbox = new HBox(submit, back);
+					playerLayout.getChildren().add(hbox);
 					stage.setScene(playerScene);
 					stage.show();
 				}	
 			});
-			
+			back.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent arg0) {
+					playerLayout.getChildren().removeAll(playerOne,playerTwo);
+					stage.setScene(gameSelection);
+					stage.show();
+				}});
 		}
 		stage.setMinHeight(400);
 		stage.setMinWidth(400);

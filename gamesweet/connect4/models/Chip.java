@@ -1,9 +1,13 @@
 package gamesweet.connect4.models;
 
+import java.io.Serializable;
+
 import gamesweet.connect4.enums.ChipColor;
 
-public class Chip {
-	private boolean used;
+public class Chip implements Serializable {
+	
+	private static final long serialVersionUID = 4741536813816323698L;
+	
 	private final ChipColor chipColor;
 	
 	public Chip(ChipColor chipColor) {
@@ -12,13 +16,6 @@ public class Chip {
 	
 	public ChipColor getChipColor() {
 		return chipColor;
-	}
-	
-	public boolean isUsed() {
-		return used;
-	}
-	public void setUsed(boolean used) {
-		this.used = used;
 	}
 	
 }
