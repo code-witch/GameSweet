@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 public class GUI {
 	private static Stage stage;
+	private static Scene mainMenuScene;
 	GridPane gp = new GridPane();
 	StrategoPane currentPane = null;
 	Scene scene = new Scene(gp);
@@ -24,6 +25,12 @@ public class GUI {
 
 	public void init(Stage stage,Board board) {
 		GUI.stage = stage;
+		mainMenuScene = GUI.stage.getScene();
+		run(board);
+	}
+	
+	
+	public void run(Board board) {
 		for (int i = 0; i < row; i++) {
 			RowConstraints rc = new RowConstraints(50);
 			gp.getRowConstraints().add(rc);
@@ -115,7 +122,6 @@ public class GUI {
 					? this.tile.getOwner() != null 
 					? this.tile.getOwner().getName() : "" : ""));
 			this.getChildren().get(0).setStyle("-fx-alignment: center; -fx-text-fill: white; -fx-font: 20px 'comic sans ms';");
-			System.out.println(this.getChildren().get(0).getStyle());
 		}
 
 	}
