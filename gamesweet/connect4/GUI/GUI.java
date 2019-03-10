@@ -45,6 +45,8 @@ public class GUI {
 	private static int turnCount = 0;
 	private static int playerN = 1;
 	private static GridPane gridP = new GridPane();
+	private static int x;
+	private static int y;
 
 	public static GridPane run(Stage stage) {
 		scenes[1] = gamesweet.hub.App.gameSelection;
@@ -376,6 +378,13 @@ public class GUI {
 	}
 
 	private static GridPane playGame(Stage stage) {
+		if(game.getSetUp()[0] == 7) {
+			x = 700;
+			y = 900;
+		} else if(game.getSetUp()[0] == 9) {
+			x = 1400;
+			y = 1100;
+		} 
 		GridPane grid = new GridPane();
 
 		Button guest = new Button("Guest");
@@ -400,7 +409,7 @@ public class GUI {
 				a.setContentText("Guest " + playerN + " created.");
 //				System.out.println("Guest Game successfully created.");
 				if (playerN >= 2) {
-					Scene scene = new Scene(play(stage), 900, 700);
+					Scene scene = new Scene(play(stage), x, y);
 					stage.setScene(scene);
 					stage.setTitle("GameSweet - Connect Four");
 					stage.show();
@@ -442,7 +451,7 @@ public class GUI {
 			grid.add(back, 3, 2);
 			gridP = grid;
 		} else if (playerN >= 3) {
-			Scene scene = new Scene(play(stage), 900, 700);
+			Scene scene = new Scene(play(stage), x, y);
 			stage.setScene(scene);
 			stage.setTitle("GameSweet - Connect Four");
 			stage.show();
