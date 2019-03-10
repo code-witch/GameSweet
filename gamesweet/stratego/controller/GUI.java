@@ -43,9 +43,9 @@ public class GUI {
 			}
 		}
 		gp.setStyle("-fx-grid-lines-visible: true;");
-		stage.setTitle("Stratego");
-		stage.setScene(scene);
-		stage.show();
+		GUI.stage.setTitle("Stratego");
+		GUI.stage.setScene(scene);
+		GUI.stage.show();
 	}
 
 //	public void run() {
@@ -87,13 +87,28 @@ public class GUI {
 			this.x = x;
 			this.y = y;
 			this.tile = tile;
-			this.setStyle(this.tile != null
-					? this.tile.getOwner() != null 
-					? this.tile.getOwner().getColor() == Color.RED 
-					? "-fx-background-color: red;" 
-					: "-fx-background-color: blue;"
-					: "-fx-background-color: white;"
-					: "-fx-background-color: white;");
+			
+			if(this.tile == null) {
+				this.setStyle("-fx-background-color: orange;");				
+			} else if(this.tile.getOwner() == null) {
+				this.setStyle("-fx-background-color: #004C00;"); // green #004C00
+			} else if(this.tile.getOwner().getColor() == null) {
+				this.setStyle("-fx-background-color: #00CCCC;"); // water #00CCCC
+			} else if(this.tile.getOwner().getColor() == Color.RED) {
+				this.setStyle("-fx-background-color: #992828;"); //red #992828
+			} else if(this.tile.getOwner().getColor() == Color.BLUE) {
+				this.setStyle("-fx-background-color: #3232AD;"); // blue #3232AD
+			} else {
+				this.setStyle("-fx-background-color: black;");
+			}
+			
+//			this.setStyle(this.tile != null
+//					? this.tile.getOwner() != null 
+//					? this.tile.getOwner().getColor() == Color.RED 
+//					? "-fx-background-color: #992828;" 
+//					: "-fx-background-color: #3232AD;"
+//					: "-fx-background-color: white;"
+//					: "-fx-background-color: white;");
 			this.getChildren().add(new Label(this.tile != null
 					? this.tile.getOwner() != null 
 					? this.tile.getOwner().getName() : "" : ""));
