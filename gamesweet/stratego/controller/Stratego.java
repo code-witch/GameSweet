@@ -2,10 +2,8 @@ package gamesweet.stratego.controller;
 
 import gamesweet.base.Game;
 import gamesweet.base.PlayerAmount;
-import gamesweet.stratego.enumerations.CharacterType;
 import gamesweet.stratego.enumerations.Color;
 import gamesweet.stratego.models.*;
-import gamesweet.stratego.models.Character;
 import javafx.stage.Stage;
 
 public class Stratego extends Game {

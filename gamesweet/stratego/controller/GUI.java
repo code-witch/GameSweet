@@ -3,27 +3,44 @@ package gamesweet.stratego.controller;
 import gamesweet.stratego.enumerations.Color;
 import gamesweet.stratego.models.Board;
 import gamesweet.stratego.models.Tile;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class GUI {
+	private static int turn = 0;
 	private static Stage stage;
 	private static Scene mainMenuScene;
 	GridPane gp = new GridPane();
+	Button btn = new Button("Back");
+	VBox vbox = new VBox(gp,btn);
 	StrategoPane currentPane = null;
-	Scene scene = new Scene(gp);
+	Scene scene = new Scene(vbox);
 	int row = 10;
 	int col = 10;
 	StrategoPane[][] grid = new StrategoPane[col][row];
 
 	public void init(Stage stage,Board board) {
+		vbox.setAlignment(Pos.CENTER);
+		btn.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event) {
+				GUI.stage.setScene(mainMenuScene);
+			}
+
+			
+		});
 		GUI.stage = stage;
 		mainMenuScene = GUI.stage.getScene();
 		run(board);
@@ -53,6 +70,35 @@ public class GUI {
 		GUI.stage.setTitle("Stratego");
 		GUI.stage.setScene(scene);
 		GUI.stage.show();
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[i].length; j++) {
+				if (grid[i][j].tile != null) {
+					if (grid[i][j].tile.getOwner() != null) {
+						if (grid[i][j].tile.getOwner().getColor() != null) {
+							if (grid[i][j].tile.getOwner().getColor() == Color.RED) {
+								// red
+								if (turn % 2 == 0) {
+									// keep red labels
+									grid[i][j].label.setText(grid[i][j].tile.getOwner().getName());
+								}
+								if (turn % 2 == 1) {
+									grid[i][j].label.setText("");
+								}
+							} else {
+								// blue
+								if (turn % 2 == 0) {
+									grid[i][j].label.setText("");
+								}
+								if (turn % 2 == 1) {
+									// keep blue labels
+									grid[i][j].label.setText(grid[i][j].tile.getOwner().getName());
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 //	public void run() {
@@ -62,6 +108,8 @@ public class GUI {
 
 		@Override
 		public void handle(MouseEvent event) {
+			
+			
 			if(currentPane == null) {
 				currentPane = (StrategoPane) event.getSource();
 			} else {
@@ -76,20 +124,53 @@ public class GUI {
 				source.y = y;
 				grid[currentPane.x][currentPane.y] = currentPane;
 				grid[source.x][source.y] = source;
+		
 				gp.add(currentPane,currentPane.x,currentPane.y);
 				gp.add(source, source.x, source.y);
+				
+				
 				currentPane = null;
+				turn++;
 				gp.setStyle("-fx-grid-lines-visible: false;");
 				gp.setStyle("-fx-grid-lines-visible: true;");
+				for (int i = 0; i < grid.length; i++) {
+					for (int j = 0; j < grid[i].length; j++) {
+						if (grid[i][j].tile != null) {
+							if (grid[i][j].tile.getOwner() != null) {
+								if (grid[i][j].tile.getOwner().getColor() != null) {
+									if (grid[i][j].tile.getOwner().getColor() == Color.RED) {
+										// red
+										if (turn % 2 == 0) {
+											// keep red labels
+											grid[i][j].label.setText(grid[i][j].tile.getOwner().getName());
+										}
+										if (turn % 2 == 1) {
+											grid[i][j].label.setText("");
+										}
+									} else {
+										// blue
+										if (turn % 2 == 0) {
+											grid[i][j].label.setText("");
+										}
+										if (turn % 2 == 1) {
+											// keep blue labels
+											grid[i][j].label.setText(grid[i][j].tile.getOwner().getName());
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 				
 			}
 		}
-		
 	}
 	
 	private class StrategoPane extends StackPane {
 		private int x, y;
 		private Tile tile;
+		private Label label;
 		
 
 		public StrategoPane(int x, int y, Tile tile) {
@@ -118,9 +199,10 @@ public class GUI {
 //					: "-fx-background-color: #3232AD;"
 //					: "-fx-background-color: white;"
 //					: "-fx-background-color: white;");
-			this.getChildren().add(new Label(this.tile != null
+			this.label = new Label(this.tile != null
 					? this.tile.getOwner() != null 
-					? this.tile.getOwner().getName() : "" : ""));
+					? this.tile.getOwner().getName() : "" : "");
+			this.getChildren().add(label);
 			this.getChildren().get(0).setStyle("-fx-alignment: center; -fx-text-fill: white; -fx-font: 20px 'comic sans ms';");
 		}
 
