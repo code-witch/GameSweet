@@ -30,12 +30,12 @@ public class Player {
 
 	public void initPieces() {
 		pieces[0][0] = new Character("1", 1, color, CharacterType.SPY);
-		pieces[0][1] = new Flag("Flag", 0, color);
+		pieces[0][1] = new Flag("F", 0, color);
 		pieces[0][2] = new Character("10", 10, color, CharacterType.MARSHAL);
 		pieces[0][3] = new Character("9",9,color,CharacterType.GENERAL);
 		
-		pieces[0][4] = new Character("9",8,color,CharacterType.COLONEL);
-		pieces[0][5] = new Character("9",8,color,CharacterType.COLONEL);
+		pieces[0][4] = new Character("8",8,color,CharacterType.COLONEL);
+		pieces[0][5] = new Character("8",8,color,CharacterType.COLONEL);
 		
 		pieces[0][6] = new Character("7",7,color,CharacterType.MAJOR);
 		pieces[0][7] = new Character("7",7,color,CharacterType.MAJOR);
@@ -71,12 +71,12 @@ public class Player {
 		pieces[3][2] = new Character("2",2,color,CharacterType.SCOUT);
 		pieces[3][3] = new Character("2",2,color,CharacterType.SCOUT);
 		
-		pieces[3][4] = new Bomb("Bomb",100,color);
-		pieces[3][5] = new Bomb("Bomb",100,color);
-		pieces[3][6] = new Bomb("Bomb",100,color);
-		pieces[3][7] = new Bomb("Bomb",100,color);
-		pieces[3][8] = new Bomb("Bomb",100,color);
-		pieces[3][9] = new Bomb("Bomb",100,color);
+		pieces[3][4] = new Bomb("B",100,color);
+		pieces[3][5] = new Bomb("B",100,color);
+		pieces[3][6] = new Bomb("B",100,color);
+		pieces[3][7] = new Bomb("B",100,color);
+		pieces[3][8] = new Bomb("B",100,color);
+		pieces[3][9] = new Bomb("B",100,color);
 		
 	}
 
