@@ -2,6 +2,7 @@ package gamesweet.hub;
 
 import java.util.HashMap;
 
+import gamesweet.Othello.game.OthelloGame;
 import gamesweet.base.Game;
 import gamesweet.base.PlayerAmount;
 
@@ -36,18 +37,7 @@ public class Hub {
 				// TODO Auto-generated method stub
 			}
 		});
-		gameOptions.put("Game3", new Game(PlayerAmount.ONE) {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-			}
-
-			@Override
-			public void init(Stage stage, String... playerName) {
-				// TODO Auto-generated method stub
-			}
-		});
+		gameOptions.put("Othello", new OthelloGame(PlayerAmount.TWO));
 		gameOptions.put("Game4", new Game(PlayerAmount.ONE) {
 
 			@Override
