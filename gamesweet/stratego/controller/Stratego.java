@@ -9,9 +9,10 @@ import gamesweet.stratego.models.Character;
 import javafx.stage.Stage;
 
 public class Stratego extends Game {
-	Player playerOne, playerTwo;
-	Board board = new Board();
-
+	private Player playerOne, playerTwo;
+	private Board board = new Board();
+	private GUI gui = new GUI();
+	
 	public Stratego(PlayerAmount playerAmount) {
 		super(playerAmount);
 	}
@@ -28,28 +29,28 @@ public class Stratego extends Game {
 			}
 		}
 		initBoard();
-		
+		gui.init(stage,board);
 		run();
 	}
 
 	@Override
 	public void run() {
-		for(Tile[] t: board.getBoard()) {
-			for (Tile tt: t) {
-				System.out.println(tt.getOwner());
-			}
-		}
+//		for(Tile[] t: board.getBoard()) {
+//			for (Tile tt: t) {
+//				System.out.println(tt.getOwner());
+//			}
+//		}
 	}
 
 	public void initBoard() {
 		for(int i = 0; i < 4;i++) {
 			for(int j = 0; j < 10; j++) {
-				board.getBoard()[i][j].setOwner(playerOne.getPieces()[i][j]);
+				board.getBoard()[j][i].setOwner(playerOne.getPieces()[i][j]);
 			}
 		}	
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 10; j++) {
-				board.getBoard()[i+6][j].setOwner(playerTwo.getPieces()[i][j]);
+				board.getBoard()[j][i+6].setOwner(playerTwo.getPieces()[i][j]);
 			}
 		}
 	}
