@@ -48,6 +48,16 @@ public class Stratego extends Game {
 				board.getBoard()[j][i].setOwner(playerOne.getPieces()[i][j]);
 			}
 		}	
+		board.getBoard()[2][4].setOwner(new Piece("", 999, null) {});
+		board.getBoard()[3][4].setOwner(new Piece("", 999, null) {});
+		board.getBoard()[2][5].setOwner(new Piece("", 999, null) {});
+		board.getBoard()[3][5].setOwner(new Piece("", 999, null) {});
+		
+		board.getBoard()[6][4].setOwner(new Piece("", 999, null) {});
+		board.getBoard()[7][4].setOwner(new Piece("", 999, null) {});
+		board.getBoard()[6][5].setOwner(new Piece("", 999, null) {});
+		board.getBoard()[7][5].setOwner(new Piece("", 999, null) {});
+		
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 10; j++) {
 				board.getBoard()[j][i+6].setOwner(playerTwo.getPieces()[i][j]);
