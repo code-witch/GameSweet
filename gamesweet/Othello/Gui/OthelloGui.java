@@ -1,7 +1,6 @@
 package gamesweet.Othello.Gui;
 
 import gamesweet.Othello.game.OthelloGame;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -19,7 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class OthelloGui extends Application implements EventHandler<ActionEvent> {
+public class OthelloGui implements EventHandler<ActionEvent> {
 	private Button[][] boardBlocks = new Button[8][8];
 	private VBox vp = new VBox();
 	private Image blkCrc = new Image("file:blkCrc.jpg", 70, 50, true, true);
@@ -28,17 +27,17 @@ public class OthelloGui extends Application implements EventHandler<ActionEvent>
 	private Image[] circles = { blkCrc, whtCrc };
 	private Label blkScore = new Label();
 	private Label whtScore = new Label();
+	private GridPane board;
 
-	@Override
 	public void start(Stage primaryStage) {
 		try {
-			OthelloGame.createBoard();
 			createMenu();
+			createBoard();
 			score();
-			vp.getChildren().add(createBoard());
 			showValidMove();
+			vp.getChildren().add(board);
 			Scene scene = new Scene(vp, 500, 500);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("othelloDesign.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("othello");
 			primaryStage.show();
@@ -47,8 +46,8 @@ public class OthelloGui extends Application implements EventHandler<ActionEvent>
 		}
 	}
 
-	private GridPane createBoard() {
-		GridPane board = new GridPane();
+	private void createBoard() {
+		board = new GridPane();
 		board.setPadding(new Insets(50, 50, 50, 50));
 		board.setAlignment(Pos.CENTER);
 		for (int i = 0; i < boardBlocks.length; i++) {
@@ -86,7 +85,6 @@ public class OthelloGui extends Application implements EventHandler<ActionEvent>
 				board.add(boardBlocks[i][j], i, j);
 			}
 		}
-		return board;
 	}
 
 	@Override
@@ -117,9 +115,7 @@ public class OthelloGui extends Application implements EventHandler<ActionEvent>
 
 	private void score() {
 		HBox scoreBoard = new HBox();
-
 		blkScore.setPadding(new Insets(5, 5, 0, 5));
-
 		whtScore.setPadding(new Insets(5, 5, 0, 5));
 		OthelloGame.trackScore(blkScore, whtScore);
 		scoreBoard.getChildren().addAll(blkScore, whtScore);
@@ -134,8 +130,4 @@ public class OthelloGui extends Application implements EventHandler<ActionEvent>
 		}
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-
-	}
 }
