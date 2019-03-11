@@ -1,5 +1,7 @@
 package gamesweet.hub;
 
+import java.util.Random;
+
 import gamesweet.base.PlayerAmount;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -40,6 +42,7 @@ public class App extends Application {
 			Button btn = new Button(key);
 			btn.setMinSize(200, 200);
 			btn.setAlignment(Pos.CENTER);
+			btn.setStyle(String.format("-fx-text-fill: white; -fx-background-color: rgb(%d,%d,%d);-fx-font: 20px 'comic sans ms';",new Random().nextInt(256),new Random().nextInt(256),new Random().nextInt(256)));
 			if(counter == 1) {
 				x = 1;
 				y = 0;
