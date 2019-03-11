@@ -17,12 +17,12 @@ public class App extends Application {
 
 	Hub hub = new Hub();
 	static GridPane gp = new GridPane();
-	public static Scene gameSelection = new Scene(gp);
+	public final static Scene gameSelection = new Scene(gp);
 	Button submit = new Button("Submit");
 	Button back = new Button("Back");
 	public static TextField playerOne;
 	public static TextField playerTwo;
-	public static VBox playerLayout = new VBox();
+	public final static VBox playerLayout = new VBox();
 	Scene playerScene = new Scene(playerLayout);	
 	
 
@@ -81,6 +81,8 @@ public class App extends Application {
 						 });
 					}
 		
+					
+					
 					
 					
 					HBox hbox = new HBox(submit, back);

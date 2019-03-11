@@ -18,9 +18,9 @@ public class Hub {
 	public Hub() {
 		gameOptions.put("Connect Four", new ConnectFour(PlayerAmount.TWO));
 		gameOptions.put("Stratego", new Stratego(PlayerAmount.TWO));
-    gameOptions.put("Othello", new OthelloGame(PlayerAmount.TWO));
+		gameOptions.put("Othello", new OthelloGame(PlayerAmount.TWO));
 		gameOptions.put("Minesweeper", new Minesweeper(PlayerAmount.ONE)); 
-		}
+	}
 
 	public HashMap<String, Game> getGameOptions() {
 		return gameOptions;
