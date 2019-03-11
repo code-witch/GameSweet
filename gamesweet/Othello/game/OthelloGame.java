@@ -1,5 +1,6 @@
 package gamesweet.Othello.game;
 
+import gamesweet.Othello.Gui.OthelloGui;
 import gamesweet.Othello.models.Disk;
 import gamesweet.Othello.models.Player;
 import gamesweet.base.Game;
@@ -16,18 +17,21 @@ public class OthelloGame extends Game {
 	
 	public OthelloGame(PlayerAmount playerAmount) {
 		super(playerAmount);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 
 	public void run() {
-		
 	}
 
 	public void init(Stage stage, String... playerName) {
-		run();
+		createBoard();
+		OthelloGui gui = new OthelloGui();
+		gui.start(stage);
 
 	}
+	
+	
 
 	public static void placeBlkDisk(Button[][] b, int i, int j, Image[] colors) {
 		if (board[i][j].getSideColor().equals("")) {
