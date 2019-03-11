@@ -21,13 +21,14 @@ import javafx.stage.Stage;
 public class OthelloGui implements EventHandler<ActionEvent> {
 	private Button[][] boardBlocks = new Button[8][8];
 	private VBox vp = new VBox();
-	private Image blkCrc = new Image("file:blkCrc.jpg", 70, 50, true, true);
-	private Image whtCrc = new Image("file:whtCrc.png", 70, 50, true, true);
-	private Image clrCrc = new Image("file:clrCrc.png", 70, 50, true, true);
+	private Image blkCrc = new Image("gamesweet/Othello/diskImg/blkCrc.jpg", 70, 50, true, true);
+	private Image whtCrc = new Image("gamesweet/Othello/diskImg/whtCrc.png", 70, 50, true, true);
+	private Image clrCrc = new Image("gamesweet/Othello/diskImg/clrCrc.png", 70, 50, true, true);
 	private Image[] circles = { blkCrc, whtCrc };
 	private Label blkScore = new Label();
 	private Label whtScore = new Label();
 	private GridPane board;
+	private boolean nextTurn = false;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -89,12 +90,22 @@ public class OthelloGui implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
+		OthelloGame.resetButtons(boardBlocks);
 		for (int i = 0; i < boardBlocks.length; i++) {
 			for (int j = 0; j < boardBlocks[i].length; j++) {
 				if (event.getSource() == boardBlocks[i][j]) {
-					OthelloGame.placeBlkDisk(boardBlocks, i, j, circles);
-					OthelloGame.CheckBlkDisk(boardBlocks, i, j, circles);
-					OthelloGame.CheckWhtDisk(boardBlocks, i, j, circles);
+					if(nextTurn == false) {
+						OthelloGame.placeBlkDisk(boardBlocks, i, j, circles);
+						OthelloGame.CheckBlkDisk(boardBlocks, i, j, circles);
+						nextTurn = true;
+					}else {
+						OthelloGame.placeWhtDisk(boardBlocks, i, j, circles);
+						OthelloGame.CheckWhtDisk(boardBlocks, i, j, circles);
+						nextTurn = false;
+					}
+					showValidMove();
+					OthelloGame.trackScore(blkScore, whtScore);
+					OthelloGame.endGame(boardBlocks, blkScore, whtScore);
 					System.out.println("i-" + i);
 					System.out.println("j-" + j);
 				}
@@ -104,8 +115,6 @@ public class OthelloGui implements EventHandler<ActionEvent> {
 
 	private void createMenu() {
 		Menu gameMenu = new Menu("_Game");
-		gameMenu.getItems().add(new MenuItem("new Game.."));
-		gameMenu.getItems().add(new MenuItem("load Game.."));
 		gameMenu.getItems().add(new MenuItem("return to game hub"));
 
 		MenuBar menuBar = new MenuBar();
@@ -122,10 +131,14 @@ public class OthelloGui implements EventHandler<ActionEvent> {
 		vp.getChildren().add(scoreBoard);
 	}
 
-	private void showValidMove() {
+	public void showValidMove() {
 		for (int i = 0; i < boardBlocks.length; i++) {
 			for (int j = 0; j < boardBlocks[i].length; j++) {
-				OthelloGame.validBlkMove(boardBlocks, i, j, clrCrc);
+				if(nextTurn == false) {
+					OthelloGame.validBlkMove(boardBlocks, i, j, clrCrc);
+				}else {
+					OthelloGame.validWhtMove(boardBlocks, i, j, clrCrc);
+				}
 			}
 		}
 	}
