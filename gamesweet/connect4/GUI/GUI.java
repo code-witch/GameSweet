@@ -182,8 +182,8 @@ public class GUI {
 			GridPane.setConstraints(overlay.get(i), 5, 11);
 		}
 
-		GridPane.setConstraints(lb, 3, 17);
-		GridPane.setConstraints(back, 5, 17);
+		GridPane.setConstraints(lb, 3, 19);
+		GridPane.setConstraints(back, 5, 19);
 
 		lb.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -379,8 +379,8 @@ public class GUI {
 
 	private static GridPane playGame(Stage stage) {
 		if(game.getSetUp()[0] == 7) {
-			x = 700;
-			y = 900;
+			x = 900;
+			y = 700;
 		} else if(game.getSetUp()[0] == 9) {
 			x = 1400;
 			y = 1100;
