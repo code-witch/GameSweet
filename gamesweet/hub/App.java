@@ -1,5 +1,7 @@
 package gamesweet.hub;
 
+import java.util.Random;
+
 import gamesweet.base.PlayerAmount;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -17,86 +19,89 @@ public class App extends Application {
 
 	Hub hub = new Hub();
 	static GridPane gp = new GridPane();
-	public static Scene gameSelection = new Scene(gp);
+	public final static Scene gameSelection = new Scene(gp);
 	Button submit = new Button("Submit");
 	Button back = new Button("Back");
 	public static TextField playerOne;
 	public static TextField playerTwo;
-	public static VBox playerLayout = new VBox();
-	Scene playerScene = new Scene(playerLayout);	
-	
+	public final static VBox playerLayout = new VBox();
+	Scene playerScene = new Scene(playerLayout);
 
 	@Override
 	public void init() {
 
 	}
-	
+
 	@Override
 	public void start(Stage stage) throws Exception {
 		int counter = 0;
 		int x = 0;
 		int y = 0;
-		for(String key : hub.getGameOptions().keySet()) {
+		for (String key : hub.getGameOptions().keySet()) {
 			Button btn = new Button(key);
 			btn.setMinSize(200, 200);
 			btn.setAlignment(Pos.CENTER);
-			if(counter == 1) {
+			btn.setStyle(String.format(
+					"-fx-text-fill: rgb(%d,%d,%d); -fx-background-color: rgb(%d,%d,%d); -fx-font: 20px 'comic sans ms';",
+					new Random().nextInt(256) - 128, new Random().nextInt(256) - 128, new Random().nextInt(256) - 128,
+					new Random().nextInt(128) + 128, new Random().nextInt(128) + 128, new Random().nextInt(128) + 128));
+			System.out.println(btn.getStyle());
+			if (counter == 1) {
 				x = 1;
 				y = 0;
-			}else if(counter == 2) {
+			} else if (counter == 2) {
 				x = 0;
 				y = 1;
-			} else if(counter == 3) {
+			} else if (counter == 3) {
 				x = 1;
 				y = 1;
 			}
 			counter++;
-			gp.add(btn,y,x);			
+			gp.add(btn, y, x);
 			btn.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent ae) {
 					playerOne = new TextField("Player 1");
 					playerLayout.getChildren().add(playerOne);
-					
-					if(hub.getGameOptions().get(key).getPlayerAmount() == PlayerAmount.TWO) {
-						 playerTwo = new TextField("Player 2");	
-						 playerLayout.getChildren().add(playerTwo);
-						 
-						 submit.setOnAction(new EventHandler<ActionEvent>() {
-							 @Override
-							 public void handle(ActionEvent event) {
-								 hub.getGameOptions().get(key).init(stage,playerOne.getText(),playerTwo.getText());					
-								 System.out.println("Player 1: " + playerOne.getText());
-								 System.out.println("Player 2: " + playerTwo.getText());
-							 }
-						 });
-						 
+
+					if (hub.getGameOptions().get(key).getPlayerAmount() == PlayerAmount.TWO) {
+						playerTwo = new TextField("Player 2");
+						playerLayout.getChildren().add(playerTwo);
+
+						submit.setOnAction(new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent event) {
+								hub.getGameOptions().get(key).init(stage, playerOne.getText(), playerTwo.getText());
+								System.out.println("Player 1: " + playerOne.getText());
+								System.out.println("Player 2: " + playerTwo.getText());
+							}
+						});
+
 					} else {
 						submit.setOnAction(new EventHandler<ActionEvent>() {
-							 @Override
-							 public void handle(ActionEvent event) {
-								 hub.getGameOptions().get(key).init(stage,playerOne.getText());					
-								 System.out.println("Player 1: " + playerOne.getText());
-							 }
-						 });
+							@Override
+							public void handle(ActionEvent event) {
+								hub.getGameOptions().get(key).init(stage, playerOne.getText());
+								System.out.println("Player 1: " + playerOne.getText());
+							}
+						});
 					}
-		
-					
-					
+
 					HBox hbox = new HBox(submit, back);
 					playerLayout.getChildren().add(hbox);
 					stage.setScene(playerScene);
 					stage.show();
-				}	
+				}
 			});
 			back.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent arg0) {
-					playerLayout.getChildren().removeAll(playerOne,playerTwo);
+					playerLayout.getChildren().removeAll(playerOne, playerTwo);
 					stage.setScene(gameSelection);
 					stage.show();
-				}});
+				}
+			});
 		}
 		stage.setMinHeight(400);
 		stage.setMinWidth(400);

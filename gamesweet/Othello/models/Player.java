@@ -1,10 +1,9 @@
 package gamesweet.Othello.models;
 
 public class Player {
-	private Disk[] disks;
 	private int score;
-	private int numOfDisks;
 	private final String name;
+	private int playOptions;
 	
 	public Player(String name) {
 		this.name = name;
@@ -18,20 +17,16 @@ public class Player {
 		this.score = score;
 	}
 
-	public int getNumOfDisks() {
-		return numOfDisks;
-	}
-
-	public void setNumOfDisks(int numOfDisks) {
-		this.numOfDisks = numOfDisks;
-	}
-
-	public Disk[] getDisks() {
-		return disks;
-	}
-
 	public String getName() {
 		return name;
+	}
+
+	public int getPlayOptions() {
+		return playOptions;
+	}
+
+	public void setPlayOptions(int playOptions) {
+		this.playOptions = playOptions;
 	}
 	
 }
