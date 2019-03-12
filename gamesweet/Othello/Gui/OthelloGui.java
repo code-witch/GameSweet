@@ -2,6 +2,7 @@ package gamesweet.Othello.Gui;
 
 import gamesweet.Othello.game.OthelloGame;
 import gamesweet.base.Game;
+import gamesweet.hub.App;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -31,6 +32,8 @@ public class OthelloGui implements EventHandler<ActionEvent> {
 	private Label playerName = new Label();
 	private GridPane board;
 	private boolean nextTurn = false;
+	private boolean noPlayOptions = false;
+	private Stage stage;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -41,9 +44,10 @@ public class OthelloGui implements EventHandler<ActionEvent> {
 			vp.getChildren().add(board);
 			Scene scene = new Scene(vp, 500, 500);
 			scene.getStylesheets().add(getClass().getResource("othelloDesign.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.setTitle("othello");
-			primaryStage.show();
+			stage = primaryStage;
+			stage.setScene(scene);
+			stage.setTitle("othello");
+			stage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -112,20 +116,33 @@ public class OthelloGui implements EventHandler<ActionEvent> {
 						
 
 					}
+					
 					if(OthelloGame.getPlayOptions(boardBlocks) == 0) {
 						if(nextTurn == true) {
 							OthelloGame.resetButtons(boardBlocks);
 							showBlkValidMove();
-							nextTurn = false;
+							if(OthelloGame.getPlayOptions(boardBlocks) == 0) {
+								noPlayOptions = true;
+								OthelloGame.endGame(boardBlocks, blkScore, whtScore, noPlayOptions);
+							}else {
+								noPlayOptions = false;
+								nextTurn = false;
+							}
 						}else {
 							OthelloGame.resetButtons(boardBlocks);
 							showWhtValidMove();
-							nextTurn = true;
+							if(OthelloGame.getPlayOptions(boardBlocks) == 0) {
+								noPlayOptions = true;
+								OthelloGame.endGame(boardBlocks, blkScore, whtScore, noPlayOptions);
+							}else {
+								noPlayOptions = false;
+								nextTurn = false;
+							}
 						}
 					}
 					OthelloGame.showTurnName(playerName, nextTurn);
 					OthelloGame.trackScore(blkScore, whtScore);
-					OthelloGame.endGame(boardBlocks, blkScore, whtScore);
+					OthelloGame.endGame(boardBlocks, blkScore, whtScore, noPlayOptions);
 					System.out.println("i-" + i);
 					System.out.println("j-" + j);
 				}
@@ -135,7 +152,15 @@ public class OthelloGui implements EventHandler<ActionEvent> {
 
 	private void createMenu() {
 		Menu gameMenu = new Menu("_Game");
-		gameMenu.getItems().add(new MenuItem("return to game hub"));
+		MenuItem hub = new MenuItem("return to game hub");
+		hub.setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent arg0) {
+					App.playerLayout.getChildren().removeAll(App.playerOne, App.playerTwo);
+					stage.setScene(App.gameSelection);
+					stage.show();
+				}
+			});
+		gameMenu.getItems().add(hub);
 
 		MenuBar menuBar = new MenuBar();
 		menuBar.getMenus().addAll(gameMenu);

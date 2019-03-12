@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Disk {
 	private String[] colors = {"black", "white"};
 	private String sideColor = "";
-	private boolean isSandWitched = false;
+	private boolean isSandWitched;
 	private boolean topLeftDiagValid;
 	private boolean vrtUpValid;
 	private boolean topRightDiagValid;

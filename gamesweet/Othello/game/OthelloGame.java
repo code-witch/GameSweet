@@ -92,6 +92,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[minColIndex][minRowIndex];
 					if (checkDisk.getSideColor().equals("white")) {
 						if (checkDisk.isTopLeftDiagValid()) {
+							checkCount = 1;
 							board[minColIndex][minRowIndex].setSideColor("black");
 							board[minColIndex][minRowIndex].setSandWitched(false);
 							img = new ImageView(colors[0]);
@@ -120,7 +121,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[i][minRowIndex];
 					if (checkDisk.getSideColor().equals("white")) {
 						if (checkDisk.isVrtUpValid()) {
-
+							checkCount = 1;
 							board[i][minRowIndex].setSideColor("black");
 							board[i][minRowIndex].setSandWitched(false);
 							img = new ImageView(colors[0]);
@@ -149,7 +150,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[posColIndex][minRowIndex];
 					if (checkDisk.getSideColor().equals("white")) {
 						if (checkDisk.isTopRightDiagValid()) {
-
+							checkCount = 1;
 							board[posColIndex][minRowIndex].setSideColor("black");
 							board[posColIndex][minRowIndex].setSandWitched(false);
 							img = new ImageView(colors[0]);
@@ -178,7 +179,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[posColIndex][j];
 					if (checkDisk.getSideColor().equals("white")) {
 						if (checkDisk.isHorRightValid()) {
-
+							checkCount = 1;
 							board[posColIndex][j].setSideColor("black");
 							board[posColIndex][j].setSandWitched(false);
 							img = new ImageView(colors[0]);
@@ -207,7 +208,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[posColIndex][posRowIndex];
 					if (checkDisk.getSideColor().equals("white")) {
 						if (checkDisk.isBotRightDiagValid()) {
-
+							checkCount = 1;
 							board[posColIndex][posRowIndex].setSideColor("black");
 							board[posColIndex][posRowIndex].setSandWitched(false);
 							img = new ImageView(colors[0]);
@@ -236,6 +237,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[i][posRowIndex];
 					if (checkDisk.getSideColor().equals("white")) {
 						if (checkDisk.isVrtDwnValid()) {
+							checkCount = 1;
 							board[i][posRowIndex].setSideColor("black");
 							board[i][posRowIndex].setSandWitched(false);
 							img = new ImageView(colors[0]);
@@ -264,7 +266,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[minColIndex][posRowIndex];
 					if (checkDisk.getSideColor().equals("white")) {
 						if (checkDisk.isBotLeftDiagValid()) {
-
+							checkCount = 1;
 							board[minColIndex][posRowIndex].setSideColor("black");
 							board[minColIndex][posRowIndex].setSandWitched(false);
 							img = new ImageView(colors[0]);
@@ -293,7 +295,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[minColIndex][j];
 					if (checkDisk.getSideColor().equals("white")) {
 						if (checkDisk.isHorLeftValid()) {
-
+							checkCount = 1;
 							board[minColIndex][j].setSideColor("black");
 							board[minColIndex][j].setSandWitched(false);
 							img = new ImageView(colors[0]);
@@ -355,7 +357,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[minColIndex][minRowIndex];
 					if (checkDisk.getSideColor().equals("black")) {
 						if (checkDisk.isTopLeftDiagValid()) {
-
+							checkCount = 1;
 							board[minColIndex][minRowIndex].setSideColor("white");
 							img = new ImageView(colors[1]);
 							b[minColIndex][minRowIndex].setGraphic(img);
@@ -383,7 +385,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[i][minRowIndex];
 					if (checkDisk.getSideColor().equals("black")) {
 						if (checkDisk.isVrtUpValid()) {
-
+							checkCount = 1;
 							board[i][minRowIndex].setSideColor("white");
 							img = new ImageView(colors[1]);
 							b[i][minRowIndex].setGraphic(img);
@@ -411,7 +413,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[posColIndex][minRowIndex];
 					if (checkDisk.getSideColor().equals("black")) {
 						if (checkDisk.isTopRightDiagValid()) {
-
+							checkCount = 1;
 							board[posColIndex][minRowIndex].setSideColor("white");
 							img = new ImageView(colors[1]);
 							b[posColIndex][minRowIndex].setGraphic(img);
@@ -439,7 +441,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[posColIndex][j];
 					if (checkDisk.getSideColor().equals("black")) {
 						if (checkDisk.isHorRightValid()) {
-							
+							checkCount = 1;
 							board[posColIndex][j].setSideColor("white");
 							img = new ImageView(colors[1]);
 							b[posColIndex][j].setGraphic(img);
@@ -467,7 +469,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[posColIndex][posRowIndex];
 					if (checkDisk.getSideColor().equals("black")) {
 						if (checkDisk.isBotRightDiagValid()) {
-
+							checkCount = 1;
 							board[posColIndex][posRowIndex].setSideColor("white");
 							img = new ImageView(colors[1]);
 							b[posColIndex][posRowIndex].setGraphic(img);
@@ -495,7 +497,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[i][posRowIndex];
 					if (checkDisk.getSideColor().equals("black")) {
 						if (checkDisk.isVrtDwnValid()) {
-
+							checkCount = 1;
 							board[i][posRowIndex].setSideColor("white");
 							img = new ImageView(colors[1]);
 							b[i][posRowIndex].setGraphic(img);
@@ -523,7 +525,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[minColIndex][posRowIndex];
 					if (checkDisk.getSideColor().equals("black")) {
 						if (checkDisk.isBotLeftDiagValid()) {
-
+							checkCount = 1;
 							board[minColIndex][posRowIndex].setSideColor("white");
 							img = new ImageView(colors[1]);
 							b[minColIndex][posRowIndex].setGraphic(img);
@@ -551,7 +553,7 @@ public class OthelloGame extends Game {
 					Disk checkDisk = board[minColIndex][j];
 					if (checkDisk.getSideColor().equals("black")) {
 						if (checkDisk.isHorLeftValid()) {
-
+							checkCount = 1;
 							board[minColIndex][j].setSideColor("white");
 							img = new ImageView(colors[1]);
 							b[minColIndex][j].setGraphic(img);
@@ -609,369 +611,360 @@ public class OthelloGame extends Game {
 		// check valid blk play
 		if (posColIndex < b.length && posRowIndex < b[0].length && minColIndex >= 0 && minRowIndex >= 0) {
 			if (!board[i][j].getSideColor().equals("black")) {
-				for (int k = 0; k < checkBlocks.length; k++) {
-					if (k == 0) {
-						if (!checkBlocks[0].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("white")) {
-								Disk checkDisk = board[minColIndex][minRowIndex];
-								if (checkDisk.getSideColor().equals("white")) {
-									do {
-										int index1 = minColIndex - checkCount;
-										int index2 = minRowIndex - checkCount;
-										if (index1 >= 0 && index2 >= 0) {
 
-											checkDisk = board[index1][index2];
-											if (checkDisk.getSideColor().equals("white")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("black")) {
-												isValid = true;
-												isChecking = false;
+				if (!checkBlocks[0].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("white")) {
+						Disk checkDisk = board[minColIndex][minRowIndex];
+						if (checkDisk.getSideColor().equals("white")) {
+							checkCount = 1;
+							do {
+								int index1 = minColIndex - checkCount;
+								int index2 = minRowIndex - checkCount;
+								if (index1 >= 0 && index2 >= 0) {
 
-											} else {
-												isValid = false;
-												isChecking = false;
+									checkDisk = board[index1][index2];
+									if (checkDisk.getSideColor().equals("white")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("black")) {
+										isValid = true;
+										isChecking = false;
 
-												// board[minColIndex][minRowIndex].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[minColIndex][minRowIndex].setSandWitched(false);
-										}
-									} while (isChecking);
+									} else {
+										isValid = false;
+										isChecking = false;
+
+										// board[minColIndex][minRowIndex].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[minColIndex][minRowIndex].setSandWitched(false);
 								}
-								if (isValid) {
+							} while (isChecking);
+						}
+						if (isValid) {
 //								topLeftDiagValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[minColIndex][minRowIndex].setTopLeftDiagValid(true);
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[minColIndex][minRowIndex].setTopLeftDiagValid(true);
 
-								} else {
-									board[minColIndex][minRowIndex].setTopLeftDiagValid(false);
-									// topLeftDiagValid = false;
-								}
-							}
-
-						}
-					}
-					if (k == 1) {
-						if (!checkBlocks[1].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("white")) {
-								Disk checkDisk = board[i][minRowIndex];
-								if (checkDisk.getSideColor().equals("white")) {
-									do {
-										int index1 = minRowIndex - checkCount;
-										if (index1 > 0) {
-
-											checkDisk = board[i][index1];
-											if (checkDisk.getSideColor().equals("white")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("black")) {
-												isValid = true;
-												isChecking = false;
-
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[i][minRowIndex].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[i][minRowIndex].setSandWitched(false);
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// vrtUpValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[i][minRowIndex].setVrtUpValid(true);
-
-								} else {
-									board[i][minRowIndex].setVrtUpValid(false);
-									// vrtUpValid = false;
-								}
-							}
-						}
-					}
-					if (k == 2) {
-						if (!checkBlocks[2].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("white")) {
-								Disk checkDisk = board[posColIndex][minRowIndex];
-								if (checkDisk.getSideColor().equals("white")) {
-									do {
-										int index1 = posColIndex + checkCount;
-										int index2 = minRowIndex - checkCount;
-										if (index1 < b[i].length && index2 > 0) {
-
-											checkDisk = board[index1][index2];
-											if (checkDisk.getSideColor().equals("white")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("black")) {
-												isValid = true;
-												isChecking = false;
-
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[posColIndex][minRowIndex].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[posColIndex][minRowIndex].setSandWitched(false);
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// topRightDiagValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[posColIndex][minRowIndex].setTopRightDiagValid(true);
-
-								} else {
-									board[posColIndex][minRowIndex].setTopRightDiagValid(false);
-									// topRightDiagValid = false;
-								}
-							}
-						}
-					}
-					if (k == 3) {
-						if (!checkBlocks[3].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("white")) {
-								Disk checkDisk = board[posColIndex][j];
-								if (checkDisk.getSideColor().equals("white")) {
-									do {
-										int index1 = posColIndex + checkCount;
-										if (index1 < b[i].length) {
-
-											checkDisk = board[index1][j];
-											if (checkDisk.getSideColor().equals("white")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("black")) {
-												isValid = true;
-												isChecking = false;
-
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[posColIndex][j].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[posColIndex][j].setSandWitched(false);
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// horRightValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[posColIndex][j].setHorRightValid(true);
-
-								} else {
-									board[posColIndex][j].setHorRightValid(false);
-									// horRightValid = false;
-								}
-							}
-						}
-					}
-					if (k == 4) {
-						if (!checkBlocks[4].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("white")) {
-								Disk checkDisk = board[posColIndex][posRowIndex];
-								if (checkDisk.getSideColor().equals("white")) {
-									do {
-										int index1 = posColIndex + checkCount;
-										int index2 = posRowIndex + checkCount;
-										if (index1 < b[i].length && index2 < b[i].length) {
-
-											checkDisk = board[index1][index2];
-											if (checkDisk.getSideColor().equals("white")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("black")) {
-												isValid = true;
-												isChecking = false;
-
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[posColIndex][posRowIndex].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[posColIndex][posRowIndex].setSandWitched(false);
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// botRightDiagValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[posColIndex][posRowIndex].setBotRightDiagValid(true);
-
-								} else {
-									board[posColIndex][posRowIndex].setBotRightDiagValid(false);
-									// botRightDiagValid = false;
-								}
-							}
-						}
-					}
-					if (k == 5) {
-						if (!checkBlocks[5].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("white")) {
-								Disk checkDisk = board[i][posRowIndex];
-								if (checkDisk.getSideColor().equals("white")) {
-									do {
-										int index1 = posRowIndex + checkCount;
-										if (index1 < b.length) {
-
-											checkDisk = board[i][index1];
-											if (checkDisk.getSideColor().equals("white")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("black")) {
-												isValid = true;
-												isChecking = false;
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[i][posRowIndex].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[i][posRowIndex].setSandWitched(false);
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// vrtDwnValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[i][posRowIndex].setVrtDwnValid(true);
-
-								} else {
-									board[i][posRowIndex].setVrtDwnValid(false);
-									// vrtDwnValid = false;
-								}
-							}
-						}
-					}
-					if (k == 6) {
-						if (!checkBlocks[6].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("white")) {
-								Disk checkDisk = board[minColIndex][posRowIndex];
-								if (checkDisk.getSideColor().equals("white")) {
-									do {
-										int index1 = minColIndex - checkCount;
-										int index2 = posRowIndex + checkCount;
-										if (index1 > 0 && index2 < b[i].length) {
-
-											checkDisk = board[index1][index2];
-											if (checkDisk.getSideColor().equals("white")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("black")) {
-												isValid = true;
-												isChecking = false;
-
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[minColIndex][posRowIndex].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[minColIndex][posRowIndex].setSandWitched(false);
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// botLeftDiagValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[minColIndex][posRowIndex].setBotLeftDiagValid(true);
-
-								} else {
-									board[minColIndex][posRowIndex].setBotLeftDiagValid(false);
-									// botLeftDiagValid = false;
-								}
-							}
-						}
-					}
-					if (k == 7) {
-						if (!checkBlocks[7].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("white")) {
-								Disk checkDisk = board[minColIndex][j];
-								if (checkDisk.getSideColor().equals("white")) {
-									do {
-										int index1 = minColIndex - checkCount;
-										if (index1 > 0) {
-
-											checkDisk = board[index1][j];
-											if (checkDisk.getSideColor().equals("white")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("black")) {
-												isValid = true;
-												isChecking = false;
-
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[minColIndex][j].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[minColIndex][j].setSandWitched(false);
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// horLeftValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[minColIndex][j].setHorLeftValid(true);
-
-								} else {
-									board[minColIndex][j].setHorLeftValid(false);
-									;
-									// horLeftValid = false;
-								}
-							}
+						} else {
+							board[minColIndex][minRowIndex].setTopLeftDiagValid(false);
+							// topLeftDiagValid = false;
 						}
 					}
 
 				}
-			}
-		}
-//		if (topLeftDiagValid || vrtUpValid || topRightDiagValid || horRightValid || botRightDiagValid || vrtDwnValid
-//				|| botLeftDiagValid || horLeftValid) {
-//			img = new ImageView(validCrc);
-//			b[i][j].setGraphic(img);
-//			b[i][j].setDisable(false);
-//		}
-	}
 
+				if (!checkBlocks[1].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("white")) {
+						Disk checkDisk = board[i][minRowIndex];
+						if (checkDisk.getSideColor().equals("white")) {
+							checkCount = 1;
+							do {
+								int index1 = minRowIndex - checkCount;
+								if (index1 > 0) {
+
+									checkDisk = board[i][index1];
+									if (checkDisk.getSideColor().equals("white")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("black")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[i][minRowIndex].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[i][minRowIndex].setSandWitched(false);
+								}
+							} while (isChecking);
+						}
+						if (isValid) {
+							// vrtUpValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[i][minRowIndex].setVrtUpValid(true);
+
+						} else {
+							board[i][minRowIndex].setVrtUpValid(false);
+							// vrtUpValid = false;
+						}
+					}
+				}
+
+				if (!checkBlocks[2].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("white")) {
+						Disk checkDisk = board[posColIndex][minRowIndex];
+						if (checkDisk.getSideColor().equals("white")) {
+							checkCount = 1;
+							do {
+								int index1 = posColIndex + checkCount;
+								int index2 = minRowIndex - checkCount;
+								if (index1 < b[i].length && index2 > 0) {
+
+									checkDisk = board[index1][index2];
+									if (checkDisk.getSideColor().equals("white")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("black")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[posColIndex][minRowIndex].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[posColIndex][minRowIndex].setSandWitched(false);
+								}
+							} while (isChecking);
+						}
+						if (isValid) {
+							// topRightDiagValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[posColIndex][minRowIndex].setTopRightDiagValid(true);
+
+						} else {
+							board[posColIndex][minRowIndex].setTopRightDiagValid(false);
+							// topRightDiagValid = false;
+						}
+					}
+				}
+
+				if (!checkBlocks[3].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("white")) {
+						Disk checkDisk = board[posColIndex][j];
+						if (checkDisk.getSideColor().equals("white")) {
+							checkCount = 1;
+							do {
+								int index1 = posColIndex + checkCount;
+								if (index1 < b[i].length) {
+
+									checkDisk = board[index1][j];
+									if (checkDisk.getSideColor().equals("white")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("black")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[posColIndex][j].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[posColIndex][j].setSandWitched(false);
+								}
+							} while (isChecking);
+						}
+						if (isValid) {
+							// horRightValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[posColIndex][j].setHorRightValid(true);
+
+						} else {
+							board[posColIndex][j].setHorRightValid(false);
+							// horRightValid = false;
+						}
+					}
+				}
+
+				if (!checkBlocks[4].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("white")) {
+						Disk checkDisk = board[posColIndex][posRowIndex];
+						if (checkDisk.getSideColor().equals("white")) {
+							checkCount = 1;
+							do {
+								int index1 = posColIndex + checkCount;
+								int index2 = posRowIndex + checkCount;
+								if (index1 < b[i].length && index2 < b[i].length) {
+
+									checkDisk = board[index1][index2];
+									if (checkDisk.getSideColor().equals("white")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("black")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[posColIndex][posRowIndex].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[posColIndex][posRowIndex].setSandWitched(false);
+								}
+							} while (isChecking);
+						}
+						if (isValid) {
+							// botRightDiagValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[posColIndex][posRowIndex].setBotRightDiagValid(true);
+
+						} else {
+							board[posColIndex][posRowIndex].setBotRightDiagValid(false);
+							// botRightDiagValid = false;
+						}
+					}
+				}
+
+				if (!checkBlocks[5].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("white")) {
+						Disk checkDisk = board[i][posRowIndex];
+						if (checkDisk.getSideColor().equals("white")) {
+							checkCount = 1;
+							do {
+								int index1 = posRowIndex + checkCount;
+								if (index1 < b.length) {
+
+									checkDisk = board[i][index1];
+									if (checkDisk.getSideColor().equals("white")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("black")) {
+										isValid = true;
+										isChecking = false;
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[i][posRowIndex].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[i][posRowIndex].setSandWitched(false);
+								}
+							} while (isChecking);
+						}
+						if (isValid) {
+							// vrtDwnValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[i][posRowIndex].setVrtDwnValid(true);
+
+						} else {
+							board[i][posRowIndex].setVrtDwnValid(false);
+							// vrtDwnValid = false;
+						}
+					}
+				}
+
+				if (!checkBlocks[6].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("white")) {
+						Disk checkDisk = board[minColIndex][posRowIndex];
+						if (checkDisk.getSideColor().equals("white")) {
+							checkCount = 1;
+							do {
+								int index1 = minColIndex - checkCount;
+								int index2 = posRowIndex + checkCount;
+								if (index1 > 0 && index2 < b[i].length) {
+
+									checkDisk = board[index1][index2];
+									if (checkDisk.getSideColor().equals("white")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("black")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[minColIndex][posRowIndex].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[minColIndex][posRowIndex].setSandWitched(false);
+								}
+							} while (isChecking);
+						}
+						if (isValid) {
+							// botLeftDiagValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[minColIndex][posRowIndex].setBotLeftDiagValid(true);
+
+						} else {
+							board[minColIndex][posRowIndex].setBotLeftDiagValid(false);
+							// botLeftDiagValid = false;
+						}
+					}
+				}
+
+				if (!checkBlocks[7].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("white")) {
+						Disk checkDisk = board[minColIndex][j];
+						if (checkDisk.getSideColor().equals("white")) {
+							checkCount = 1;
+							do {
+								int index1 = minColIndex - checkCount;
+								if (index1 > 0) {
+
+									checkDisk = board[index1][j];
+									if (checkDisk.getSideColor().equals("white")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("black")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[minColIndex][j].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[minColIndex][j].setSandWitched(false);
+								}
+							} while (isChecking);
+						}
+						if (isValid) {
+							// horLeftValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[minColIndex][j].setHorLeftValid(true);
+
+						} else {
+							board[minColIndex][j].setHorLeftValid(false);
+							;
+							// horLeftValid = false;
+						}
+					}
+				}
+			}
+
+		}
+	}
 	public static void validWhtMove(Button[][] b, int i, int j, Image validCrc) {
 		Disk[] checkBlocks = checkSurroundings(i, j);
 		ImageView img;
@@ -1006,366 +999,360 @@ public class OthelloGame extends Game {
 		// check valid wht play
 		if (posColIndex < b.length && posRowIndex < b[0].length && minColIndex >= 0 && minRowIndex >= 0) {
 			if (!board[i][j].getSideColor().equals("white")) {
-				for (int k = 0; k < checkBlocks.length; k++) {
-					// checks the top left diagonal block
-					if (k == 0) {
-						// checks if block has a color
-						if (!checkBlocks[k].getSideColor().equals("")) {
-							// checks if the current block is not blk
-							if (!board[i][j].getSideColor().equals("black")) {
-								// set check disk to the top left diagonal block
-								Disk checkDisk = board[minColIndex][minRowIndex];
-								if (checkDisk.getSideColor().equals("black")) {
-									do {
-										int index1 = minColIndex - checkCount;
-										int index2 = minRowIndex - checkCount;
-										if (index1 > 0 && index2 > 0) {
 
-											checkDisk = board[index1][index2];
-											if (checkDisk.getSideColor().equals("black")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("white")) {
-												isValid = true;
-												isChecking = false;
+				// checks the top left diagonal block
 
-											} else {
-												isValid = false;
-												isChecking = false;
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// topLeftDiagValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[minColIndex][minRowIndex].setTopLeftDiagValid(true);
+				// checks if block has a color
+				if (!checkBlocks[0].getSideColor().equals("")) {
+					// checks if the current block is not blk
+					if (!board[i][j].getSideColor().equals("black")) {
+						// set check disk to the top left diagonal block
+						Disk checkDisk = board[minColIndex][minRowIndex];
+						if (checkDisk.getSideColor().equals("black")) {
+							checkCount = 1;
+							do {
+								int index1 = minColIndex - checkCount;
+								int index2 = minRowIndex - checkCount;
+								if (index1 > 0 && index2 > 0) {
 
+									checkDisk = board[index1][index2];
+									if (checkDisk.getSideColor().equals("black")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("white")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+									}
 								} else {
-									board[minColIndex][minRowIndex].setTopLeftDiagValid(false);
-									// topLeftDiagValid = false;
+									isValid = false;
+									isChecking = false;
 								}
-							}
+							} while (isChecking);
+						}
+						if (isValid) {
+							// topLeftDiagValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[minColIndex][minRowIndex].setTopLeftDiagValid(true);
 
+						} else {
+							board[minColIndex][minRowIndex].setTopLeftDiagValid(false);
+							// topLeftDiagValid = false;
 						}
 					}
-					if (k == 1) {
-						if (!checkBlocks[k].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("black")) {
-								Disk checkDisk = board[i][minRowIndex];
-								if (checkDisk.getSideColor().equals("black")) {
-									do {
-										int index1 = minRowIndex - checkCount;
-										if (index1 > 0) {
 
-											checkDisk = board[i][index1];
-											if (checkDisk.getSideColor().equals("black")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("white")) {
-												isValid = true;
-												isChecking = false;
+				}
 
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[i][minRowIndex].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[i][minRowIndex].setSandWitched(false);
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// vrtUpValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[i][minRowIndex].setVrtUpValid(true);
+				if (!checkBlocks[1].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("black")) {
+						Disk checkDisk = board[i][minRowIndex];
+						if (checkDisk.getSideColor().equals("black")) {
+							checkCount = 1;
+							do {
+								int index1 = minRowIndex - checkCount;
+								if (index1 > 0) {
 
+									checkDisk = board[i][index1];
+									if (checkDisk.getSideColor().equals("black")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("white")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[i][minRowIndex].setSandWitched(false);
+									}
 								} else {
-									board[i][minRowIndex].setVrtUpValid(false);
-									// vrtUpValid = false;
+									isValid = false;
+									isChecking = false;
+									// board[i][minRowIndex].setSandWitched(false);
 								}
-							}
+							} while (isChecking);
 						}
-					}
-					if (k == 2) {
-						if (!checkBlocks[k].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("black")) {
-								Disk checkDisk = board[posColIndex][minRowIndex];
-								if (checkDisk.getSideColor().equals("black")) {
-									do {
-										int index1 = posColIndex + checkCount;
-										int index2 = minRowIndex - checkCount;
-										if (index1 < b[i].length && index2 > 0) {
+						if (isValid) {
+							// vrtUpValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[i][minRowIndex].setVrtUpValid(true);
 
-											checkDisk = board[index1][index2];
-											if (checkDisk.getSideColor().equals("black")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("white")) {
-												isValid = true;
-												isChecking = false;
-
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[posColIndex][minRowIndex].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[posColIndex][minRowIndex].setSandWitched(false);
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// topRightDiagValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[posColIndex][minRowIndex].setTopRightDiagValid(true);
-
-								} else {
-									board[posColIndex][minRowIndex].setTopRightDiagValid(false);
-									// topRightDiagValid = false;
-								}
-							}
-						}
-					}
-					if (k == 3) {
-						if (!checkBlocks[k].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("black")) {
-								Disk checkDisk = board[posColIndex][j];
-								if (checkDisk.getSideColor().equals("black")) {
-									do {
-										int index1 = posColIndex + checkCount;
-										if (index1 < b[i].length) {
-
-											checkDisk = board[posColIndex + checkCount][j];
-											if (checkDisk.getSideColor().equals("black")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("white")) {
-												isValid = true;
-												isChecking = false;
-
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[posColIndex][j].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[posColIndex][j].setSandWitched(false);
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// horRightValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[posColIndex][j].setHorRightValid(true);
-
-								} else {
-									board[posColIndex][j].setHorRightValid(false);
-									// horRightValid = false;
-								}
-							}
-						}
-					}
-					if (k == 4) {
-						if (!checkBlocks[k].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("black")) {
-								Disk checkDisk = board[posColIndex][posRowIndex];
-								if (checkDisk.getSideColor().equals("black")) {
-									do {
-										int index1 = posColIndex + checkCount;
-										int index2 = posRowIndex + checkCount;
-										if (index1 < b[i].length && index2 < b[i].length) {
-
-											checkDisk = board[index1][index2];
-											if (checkDisk.getSideColor().equals("black")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("white")) {
-												isValid = true;
-												isChecking = false;
-
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[posColIndex][posRowIndex].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[posColIndex][posRowIndex].setSandWitched(false);
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// botRightDiagValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[posColIndex][posRowIndex].setBotRightDiagValid(true);
-
-								} else {
-									board[posColIndex][posRowIndex].setBotRightDiagValid(false);
-									// botRightDiagValid = false;
-								}
-							}
-						}
-					}
-					if (k == 5) {
-						if (!checkBlocks[k].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("black")) {
-								Disk checkDisk = board[i][posRowIndex];
-								if (checkDisk.getSideColor().equals("black")) {
-									do {
-										int index1 = posRowIndex + checkCount;
-										if (index1 < b[i].length) {
-
-											checkDisk = board[i][index1];
-											if (checkDisk.getSideColor().equals("black")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("white")) {
-												isValid = true;
-												isChecking = false;
-
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[i][posRowIndex].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[i][posRowIndex].setSandWitched(false);
-										}
-
-									} while (isChecking);
-								}
-								if (isValid) {
-									// vrtDwnValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[i][posRowIndex].setVrtDwnValid(true);
-
-								} else {
-									board[i][posRowIndex].setVrtDwnValid(false);
-									// vrtDwnValid = false;
-								}
-							}
-						}
-					}
-					if (k == 6) {
-						if (!checkBlocks[k].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("black")) {
-								Disk checkDisk = board[minColIndex][posRowIndex];
-								if (checkDisk.getSideColor().equals("black")) {
-									do {
-										int index1 = minColIndex - checkCount;
-										int index2 = posRowIndex + checkCount;
-										if (index1 > 0 && index2 < b[i].length) {
-											checkDisk = board[index1][index2];
-											if (checkDisk.getSideColor().equals("black")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("white")) {
-												isValid = true;
-												isChecking = false;
-
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[minColIndex][posRowIndex].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[minColIndex][posRowIndex].setSandWitched(false);
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// botLeftDiagValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[minColIndex][posRowIndex].setBotLeftDiagValid(true);
-
-								} else {
-									board[minColIndex][posRowIndex].setBotLeftDiagValid(false);
-									// botLeftDiagValid = false;
-								}
-							}
-						}
-					}
-					if (k == 7) {
-						if (!checkBlocks[k].getSideColor().equals("")) {
-							if (!board[i][j].getSideColor().equals("black")) {
-								Disk checkDisk = board[minColIndex][j];
-								if (checkDisk.getSideColor().equals("black")) {
-									do {
-										int index1 = minColIndex - checkCount;
-										if (index1 > 0) {
-											checkDisk = board[index1][j];
-											if (checkDisk.getSideColor().equals("black")) {
-												checkCount++;
-												isChecking = true;
-											} else if (checkDisk.getSideColor().equals("white")) {
-												isValid = true;
-												isChecking = false;
-
-											} else {
-												isValid = false;
-												isChecking = false;
-												// board[minColIndex][j].setSandWitched(false);
-											}
-										} else {
-											isValid = false;
-											isChecking = false;
-											// board[minColIndex][j].setSandWitched(false);
-										}
-									} while (isChecking);
-								}
-								if (isValid) {
-									// horLeftValid = true;
-									img = new ImageView(validCrc);
-									b[i][j].setGraphic(img);
-									b[i][j].setDisable(false);
-									board[minColIndex][j].setHorLeftValid(true);
-
-								} else {
-									board[minColIndex][j].setHorLeftValid(false);
-									// horLeftValid = false;
-								}
-							}
+						} else {
+							board[i][minRowIndex].setVrtUpValid(false);
+							// vrtUpValid = false;
 						}
 					}
 				}
+
+				if (!checkBlocks[2].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("black")) {
+						Disk checkDisk = board[posColIndex][minRowIndex];
+						if (checkDisk.getSideColor().equals("black")) {
+							checkCount = 1;
+							do {
+								int index1 = posColIndex + checkCount;
+								int index2 = minRowIndex - checkCount;
+								if (index1 < b[i].length && index2 > 0) {
+
+									checkDisk = board[index1][index2];
+									if (checkDisk.getSideColor().equals("black")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("white")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[posColIndex][minRowIndex].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[posColIndex][minRowIndex].setSandWitched(false);
+								}
+							} while (isChecking);
+						}
+						if (isValid) {
+							// topRightDiagValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[posColIndex][minRowIndex].setTopRightDiagValid(true);
+
+						} else {
+							board[posColIndex][minRowIndex].setTopRightDiagValid(false);
+							// topRightDiagValid = false;
+						}
+					}
+				}
+
+				if (!checkBlocks[3].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("black")) {
+						Disk checkDisk = board[posColIndex][j];
+						if (checkDisk.getSideColor().equals("black")) {
+							checkCount = 1;
+							do {
+								int index1 = posColIndex + checkCount;
+								if (index1 < b[i].length) {
+
+									checkDisk = board[posColIndex + checkCount][j];
+									if (checkDisk.getSideColor().equals("black")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("white")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[posColIndex][j].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[posColIndex][j].setSandWitched(false);
+								}
+							} while (isChecking);
+						}
+						if (isValid) {
+							// horRightValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[posColIndex][j].setHorRightValid(true);
+
+						} else {
+							board[posColIndex][j].setHorRightValid(false);
+							// horRightValid = false;
+						}
+					}
+				}
+
+				if (!checkBlocks[4].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("black")) {
+						Disk checkDisk = board[posColIndex][posRowIndex];
+						if (checkDisk.getSideColor().equals("black")) {
+							checkCount = 1;
+							do {
+								int index1 = posColIndex + checkCount;
+								int index2 = posRowIndex + checkCount;
+								if (index1 < b[i].length && index2 < b[i].length) {
+
+									checkDisk = board[index1][index2];
+									if (checkDisk.getSideColor().equals("black")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("white")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[posColIndex][posRowIndex].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[posColIndex][posRowIndex].setSandWitched(false);
+								}
+							} while (isChecking);
+						}
+						if (isValid) {
+							// botRightDiagValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[posColIndex][posRowIndex].setBotRightDiagValid(true);
+
+						} else {
+							board[posColIndex][posRowIndex].setBotRightDiagValid(false);
+							// botRightDiagValid = false;
+						}
+					}
+				}
+
+				if (!checkBlocks[5].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("black")) {
+						Disk checkDisk = board[i][posRowIndex];
+						if (checkDisk.getSideColor().equals("black")) {
+							checkCount = 1;
+							do {
+								int index1 = posRowIndex + checkCount;
+								if (index1 < b[i].length) {
+
+									checkDisk = board[i][index1];
+									if (checkDisk.getSideColor().equals("black")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("white")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[i][posRowIndex].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[i][posRowIndex].setSandWitched(false);
+								}
+
+							} while (isChecking);
+						}
+						if (isValid) {
+							// vrtDwnValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[i][posRowIndex].setVrtDwnValid(true);
+
+						} else {
+							board[i][posRowIndex].setVrtDwnValid(false);
+							// vrtDwnValid = false;
+						}
+					}
+				}
+
+				if (!checkBlocks[6].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("black")) {
+						Disk checkDisk = board[minColIndex][posRowIndex];
+						if (checkDisk.getSideColor().equals("black")) {
+							checkCount = 1;
+							do {
+								int index1 = minColIndex - checkCount;
+								int index2 = posRowIndex + checkCount;
+								if (index1 > 0 && index2 < b[i].length) {
+									checkDisk = board[index1][index2];
+									if (checkDisk.getSideColor().equals("black")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("white")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[minColIndex][posRowIndex].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[minColIndex][posRowIndex].setSandWitched(false);
+								}
+							} while (isChecking);
+						}
+						if (isValid) {
+							// botLeftDiagValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[minColIndex][posRowIndex].setBotLeftDiagValid(true);
+
+						} else {
+							board[minColIndex][posRowIndex].setBotLeftDiagValid(false);
+							// botLeftDiagValid = false;
+						}
+					}
+				}
+
+				if (!checkBlocks[7].getSideColor().equals("")) {
+					if (!board[i][j].getSideColor().equals("black")) {
+						Disk checkDisk = board[minColIndex][j];
+						if (checkDisk.getSideColor().equals("black")) {
+							checkCount = 1;
+							do {
+								int index1 = minColIndex - checkCount;
+								if (index1 > 0) {
+									checkDisk = board[index1][j];
+									if (checkDisk.getSideColor().equals("black")) {
+										checkCount++;
+										isChecking = true;
+									} else if (checkDisk.getSideColor().equals("white")) {
+										isValid = true;
+										isChecking = false;
+
+									} else {
+										isValid = false;
+										isChecking = false;
+										// board[minColIndex][j].setSandWitched(false);
+									}
+								} else {
+									isValid = false;
+									isChecking = false;
+									// board[minColIndex][j].setSandWitched(false);
+								}
+							} while (isChecking);
+						}
+						if (isValid) {
+							// horLeftValid = true;
+							img = new ImageView(validCrc);
+							b[i][j].setGraphic(img);
+							b[i][j].setDisable(false);
+							board[minColIndex][j].setHorLeftValid(true);
+
+						} else {
+							board[minColIndex][j].setHorLeftValid(false);
+							// horLeftValid = false;
+						}
+					}
+				}
+
 			}
 		}
-//		if (topLeftDiagValid || vrtUpValid || topRightDiagValid || horRightValid || botRightDiagValid || vrtDwnValid
-//				|| botLeftDiagValid || horLeftValid) {
-//			img = new ImageView(validCrc);
-//			b[i][j].setGraphic(img);
-//			b[i][j].setDisable(false);
-//		}
 
 	}
 
@@ -1466,7 +1453,6 @@ public class OthelloGame extends Game {
 		}
 		return checkBlocks;
 	}
-	
 
 	public static void createBoard() {
 		for (int i = 0; i < board.length; i++) {
@@ -1533,14 +1519,14 @@ public class OthelloGame extends Game {
 	}
 
 	public static void showTurnName(Label playername, boolean turn) {
-		if(turn == false) {
+		if (turn == false) {
 			playername.setText("Current player: " + player1.getName());
-		}else {
+		} else {
 			playername.setText("Current player: " + player2.getName());
 		}
 	}
 
-	public static void endGame(Button[][] b, Label blkScore, Label whtScore) {
+	public static void endGame(Button[][] b, Label blkScore, Label whtScore, boolean noPlayOptions) {
 		int totalDisksPlayed = 0;
 		for (int i = 0; i < b.length; i++) {
 			for (int j = 0; j < b[i].length; j++) {
@@ -1549,7 +1535,7 @@ public class OthelloGame extends Game {
 				}
 			}
 		}
-		if (totalDisksPlayed == 64) {
+		if (totalDisksPlayed == 64 || noPlayOptions) {
 			for (int i = 0; i < b.length; i++) {
 				for (int j = 0; j < b[i].length; j++) {
 					b[i][j].setDisable(true);
@@ -1557,12 +1543,12 @@ public class OthelloGame extends Game {
 			}
 			trackScore(blkScore, whtScore);
 			if (player1.getScore() > player2.getScore()) {
-				blkScore.setText("black Score: " + player1.getScore() + "winner");
+				blkScore.setText("black Score: " + player1.getScore() + " WINNER");
 			} else if (player1.getScore() == player2.getScore()) {
-				blkScore.setText("black Score: " + player1.getScore() + "tied");
-				whtScore.setText("white Score: " + player2.getScore() + "tied");
+				blkScore.setText("black Score: " + player1.getScore() + " TIED");
+				whtScore.setText("white Score: " + player2.getScore() + " TIED");
 			} else {
-				whtScore.setText("whte Score: " + player2.getScore() + "winner");
+				whtScore.setText("whte Score: " + player2.getScore() + " WINNER");
 			}
 		}
 	}
