@@ -61,8 +61,8 @@ public class Board {
 			amountOfMines = 10;
 		} else if (boardsizey == 16) {
 			amountOfMines = 40;
-		} else if (boardsizey == 30) {
-			amountOfMines = 99;
+		} else if (boardsizey == 20) {
+			amountOfMines = 70;
 		}
 		return amountOfMines;
 	}
