@@ -1,6 +1,7 @@
 package gamesweet.Othello.Gui;
 
 import gamesweet.Othello.game.OthelloGame;
+import gamesweet.base.Game;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -27,6 +28,7 @@ public class OthelloGui implements EventHandler<ActionEvent> {
 	private Image[] circles = { blkCrc, whtCrc };
 	private Label blkScore = new Label();
 	private Label whtScore = new Label();
+	private Label playerName = new Label();
 	private GridPane board;
 	private boolean nextTurn = false;
 
@@ -35,7 +37,7 @@ public class OthelloGui implements EventHandler<ActionEvent> {
 			createMenu();
 			createBoard();
 			score();
-			showValidMove();
+			showBlkValidMove();
 			vp.getChildren().add(board);
 			Scene scene = new Scene(vp, 500, 500);
 			scene.getStylesheets().add(getClass().getResource("othelloDesign.css").toExternalForm());
@@ -90,20 +92,37 @@ public class OthelloGui implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
+		
 		OthelloGame.resetButtons(boardBlocks);
 		for (int i = 0; i < boardBlocks.length; i++) {
 			for (int j = 0; j < boardBlocks[i].length; j++) {
 				if (event.getSource() == boardBlocks[i][j]) {
-					if(nextTurn == false) {
+					if (nextTurn == false) {
 						OthelloGame.placeBlkDisk(boardBlocks, i, j, circles);
 						OthelloGame.CheckBlkDisk(boardBlocks, i, j, circles);
-						nextTurn = true;
-					}else {
+						showWhtValidMove();
+							nextTurn = true;
+						
+
+					} else {
 						OthelloGame.placeWhtDisk(boardBlocks, i, j, circles);
 						OthelloGame.CheckWhtDisk(boardBlocks, i, j, circles);
-						nextTurn = false;
+						showBlkValidMove();
+							nextTurn = false;
+						
+
 					}
-					showValidMove();
+					if(OthelloGame.getPlayOptions(boardBlocks) == 0) {
+						if(nextTurn == true) {
+							OthelloGame.resetButtons(boardBlocks);
+							showBlkValidMove();
+							nextTurn = false;
+						}else {
+							OthelloGame.resetButtons(boardBlocks);
+							showWhtValidMove();
+							nextTurn = true;
+						}
+					}
 					OthelloGame.trackScore(blkScore, whtScore);
 					OthelloGame.endGame(boardBlocks, blkScore, whtScore);
 					System.out.println("i-" + i);
@@ -126,19 +145,24 @@ public class OthelloGui implements EventHandler<ActionEvent> {
 		HBox scoreBoard = new HBox();
 		blkScore.setPadding(new Insets(5, 5, 0, 5));
 		whtScore.setPadding(new Insets(5, 5, 0, 5));
+		playerName.setPadding(new Insets(5, 5, 0, 5));
 		OthelloGame.trackScore(blkScore, whtScore);
-		scoreBoard.getChildren().addAll(blkScore, whtScore);
+		scoreBoard.getChildren().addAll(blkScore, whtScore, playerName);
 		vp.getChildren().add(scoreBoard);
 	}
 
-	public void showValidMove() {
+	public void showBlkValidMove() {
 		for (int i = 0; i < boardBlocks.length; i++) {
 			for (int j = 0; j < boardBlocks[i].length; j++) {
-				if(nextTurn == false) {
-					OthelloGame.validBlkMove(boardBlocks, i, j, clrCrc);
-				}else {
-					OthelloGame.validWhtMove(boardBlocks, i, j, clrCrc);
-				}
+				OthelloGame.validBlkMove(boardBlocks, i, j, clrCrc);
+			}
+		}
+	}
+
+	private void showWhtValidMove() {
+		for (int i = 0; i < boardBlocks.length; i++) {
+			for (int j = 0; j < boardBlocks[i].length; j++) {
+				OthelloGame.validWhtMove(boardBlocks, i, j, clrCrc);
 			}
 		}
 	}
