@@ -2,12 +2,9 @@ package gamesweet.hub;
 
 import java.util.HashMap;
 
+import gamesweet.Othello.game.OthelloGame;
 import gamesweet.base.Game;
 import gamesweet.base.PlayerAmount;
-import gamesweet.connect4.controllers.ConnectFour;
-import gamesweet.minesweeper.controller.Minesweeper;
-import gamesweet.stratego.controller.Stratego;
-import gamesweet.Othello.game.OthelloGame;
 
 import javafx.stage.Stage;
 

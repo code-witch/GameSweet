@@ -139,7 +139,7 @@ public class ConnectFour extends Game {
 							}
 							if (counter >= 4) {
 								System.out.println(p.getName() + " won.");
-								System.out.println("Vertical");
+								System.out.println("Horizontal");
 								winner = true;
 								break;
 							}
@@ -163,7 +163,7 @@ public class ConnectFour extends Game {
 							}
 							if (counter >= 4) {
 								winner = true;
-								System.out.println("Horizontal");
+								System.out.println("Verical");
 								break;
 							}
 						}
