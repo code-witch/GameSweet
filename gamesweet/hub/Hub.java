@@ -5,8 +5,9 @@ import java.util.HashMap;
 import gamesweet.Othello.game.OthelloGame;
 import gamesweet.base.Game;
 import gamesweet.base.PlayerAmount;
-
-import javafx.stage.Stage;
+import gamesweet.connect4.controllers.ConnectFour;
+import gamesweet.minesweeper.controller.Minesweeper;
+import gamesweet.stratego.controller.Stratego;
 
 public class Hub {
 
