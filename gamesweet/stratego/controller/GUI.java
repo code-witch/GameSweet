@@ -1,5 +1,6 @@
 package gamesweet.stratego.controller;
 
+import gamesweet.hub.App;
 import gamesweet.stratego.enumerations.Color;
 import gamesweet.stratego.models.Board;
 import gamesweet.stratego.models.Tile;
@@ -29,9 +30,12 @@ public class GUI {
 	int row = 10;
 	int col = 10;
 	StrategoPane[][] grid = new StrategoPane[col][row];
+	Button sceneChanger = new Button("Next Player");
+	Scene noCheatScene = new Scene(new VBox(new Label("No Cheating!"),sceneChanger));
 
 	public void init(Stage stage,Board board) {
 		vbox.setAlignment(Pos.CENTER);
+		((VBox)noCheatScene.getRoot()).setAlignment(Pos.CENTER);
 		btn.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
@@ -41,13 +45,24 @@ public class GUI {
 
 			
 		});
+		sceneChanger.setMinSize(300, 300);
+		sceneChanger.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				stage.setScene(scene);
+			}
+			
+		});
+		
 		GUI.stage = stage;
-		mainMenuScene = GUI.stage.getScene();
-		run(board);
+		mainMenuScene = App.gameSelection;
+		App.playerLayout.getChildren().removeAll(App.playerOne,App.playerTwo);
+		gameRun(board);
 	}
 	
 	
-	public void run(Board board) {
+	public void gameRun(Board board) {
 		for (int i = 0; i < row; i++) {
 			RowConstraints rc = new RowConstraints(50);
 			gp.getRowConstraints().add(rc);
@@ -101,8 +116,6 @@ public class GUI {
 		}
 	}
 
-//	public void run() {
-//	}
 
 	private class GridEvent implements EventHandler<MouseEvent>{
 
@@ -128,6 +141,8 @@ public class GUI {
 				gp.add(currentPane,currentPane.x,currentPane.y);
 				gp.add(source, source.x, source.y);
 				
+				stage.setScene(noCheatScene);
+				stage.show();
 				
 				currentPane = null;
 				turn++;
