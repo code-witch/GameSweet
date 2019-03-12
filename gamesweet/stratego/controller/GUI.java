@@ -3,6 +3,8 @@ package gamesweet.stratego.controller;
 import gamesweet.hub.App;
 import gamesweet.stratego.enumerations.Color;
 import gamesweet.stratego.models.Board;
+import gamesweet.stratego.models.Bomb;
+import gamesweet.stratego.models.Flag;
 import gamesweet.stratego.models.Tile;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -125,10 +127,22 @@ public class GUI {
 			
 			if(currentPane == null) {
 				currentPane = (StrategoPane) event.getSource();
+				if(currentPane.tile.getOwner() == null) {
+					currentPane = null;
+				}
+				else if(currentPane.tile.getOwner().getColor() == null) {
+					currentPane = null;
+				}
 			} else {
-				gp.getChildren().remove(currentPane); // previously clicked
-				gp.getChildren().remove((StrategoPane) event.getSource()); // currently clicked
 				StrategoPane source = (StrategoPane) event.getSource();
+				if(source.tile.getOwner() != null) {
+					if(source.tile.getOwner().getColor() == null) {
+						return;
+					}
+				}
+				
+				gp.getChildren().remove(currentPane); // previously clicked
+				gp.getChildren().remove(source); // currently clicked
 				int x = currentPane.x;
 				int y = currentPane.y;
 				currentPane.x = source.x;
@@ -137,9 +151,36 @@ public class GUI {
 				source.y = y;
 				grid[currentPane.x][currentPane.y] = currentPane;
 				grid[source.x][source.y] = source;
-		
+				if (source.tile.getOwner() != null && currentPane.tile.getOwner() != null) {
+					if (source.tile.getOwner().getRank() > currentPane.tile.getOwner().getRank()) {
+						currentPane.tile.setOwner(null);
+						currentPane.label.setText("");
+						currentPane.setStyle("-fx-background-color: #004C00;"); // green #004C00
+					} else if (source.tile.getOwner().getRank() < currentPane.tile.getOwner().getRank()) {
+						source.tile.setOwner(null);
+						source.label.setText("");
+						source.setStyle("-fx-background-color: #004C00;"); // green #004C00
+						if(source.tile.getOwner() instanceof Flag) {
+							// TODO win
+						}
+						if(source.tile.getOwner() instanceof Bomb) {
+							// TODO die
+						}
+					} else {
+						source.tile.setOwner(null);
+						source.label.setText("");
+						source.setStyle("-fx-background-color: #004C00;"); // green #004C00
+						currentPane.tile.setOwner(null);
+						currentPane.label.setText("");
+						currentPane.setStyle("-fx-background-color: #004C00;"); // green #004C00
+					}
+				}
 				gp.add(currentPane,currentPane.x,currentPane.y);
 				gp.add(source, source.x, source.y);
+				
+				
+				
+				
 				
 				stage.setScene(noCheatScene);
 				stage.show();
@@ -220,6 +261,7 @@ public class GUI {
 			this.getChildren().add(label);
 			this.getChildren().get(0).setStyle("-fx-alignment: center; -fx-text-fill: white; -fx-font: 20px 'comic sans ms';");
 		}
+		
 
 	}
 }
