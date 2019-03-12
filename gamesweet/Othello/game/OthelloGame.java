@@ -13,7 +13,8 @@ import javafx.stage.Stage;
 
 public class OthelloGame extends Game {
 	private static Disk[][] board = new Disk[8][8];
-	private static Player[] players = new Player[2];
+	private static Player player1;
+	private static Player player2;
 	private static OthelloGui gui = new OthelloGui();
 	private static int playOptions;
 
@@ -26,8 +27,8 @@ public class OthelloGame extends Game {
 
 	public void init(Stage stage, String... playerName) {
 		createBoard();
-		players[0] = new Player(playerName[0]);
-		players[1] = new Player(playerName[1]);
+		player1 = new Player(playerName[0]);
+		player2 = new Player(playerName[1]);
 		gui.start(stage);
 
 	}
@@ -1508,11 +1509,11 @@ public class OthelloGame extends Game {
 			for (int j = 0; j < board[i].length; j++) {
 				if (board[i][j].getSideColor().equals("black")) {
 					blkScoreValue++;
-					players[0].setScore(blkScoreValue);
+					player1.setScore(blkScoreValue);
 					blkScore.setText("black Score: " + blkScoreValue);
 				} else if (board[i][j].getSideColor().equals("white")) {
 					whtScoreValue++;
-					players[1].setScore(blkScoreValue);
+					player2.setScore(whtScoreValue);
 					whtScore.setText("White Score: " + whtScoreValue);
 				}
 			}
@@ -1532,7 +1533,11 @@ public class OthelloGame extends Game {
 	}
 
 	public static void showTurnName(Label playername, boolean turn) {
-
+		if(turn == false) {
+			playername.setText("Current player: " + player1.getName());
+		}else {
+			playername.setText("Current player: " + player2.getName());
+		}
 	}
 
 	public static void endGame(Button[][] b, Label blkScore, Label whtScore) {
@@ -1550,13 +1555,14 @@ public class OthelloGame extends Game {
 					b[i][j].setDisable(true);
 				}
 			}
-			if (players[0].getScore() > players[1].getScore()) {
-				blkScore.setText("black Score: " + players[0].getScore() + "winner");
-			} else if (players[0].getScore() == players[1].getScore()) {
-				blkScore.setText("black Score: " + players[0].getScore() + "tied");
-				whtScore.setText("white Score: " + players[1].getScore() + "tied");
+			trackScore(blkScore, whtScore);
+			if (player1.getScore() > player2.getScore()) {
+				blkScore.setText("black Score: " + player1.getScore() + "winner");
+			} else if (player1.getScore() == player2.getScore()) {
+				blkScore.setText("black Score: " + player1.getScore() + "tied");
+				whtScore.setText("white Score: " + player2.getScore() + "tied");
 			} else {
-				whtScore.setText("whte Score: " + players[1].getScore() + "winner");
+				whtScore.setText("whte Score: " + player2.getScore() + "winner");
 			}
 		}
 	}

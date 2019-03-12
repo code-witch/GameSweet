@@ -123,6 +123,7 @@ public class OthelloGui implements EventHandler<ActionEvent> {
 							nextTurn = true;
 						}
 					}
+					OthelloGame.showTurnName(playerName, nextTurn);
 					OthelloGame.trackScore(blkScore, whtScore);
 					OthelloGame.endGame(boardBlocks, blkScore, whtScore);
 					System.out.println("i-" + i);
@@ -147,6 +148,7 @@ public class OthelloGui implements EventHandler<ActionEvent> {
 		whtScore.setPadding(new Insets(5, 5, 0, 5));
 		playerName.setPadding(new Insets(5, 5, 0, 5));
 		OthelloGame.trackScore(blkScore, whtScore);
+		OthelloGame.showTurnName(playerName, nextTurn);
 		scoreBoard.getChildren().addAll(blkScore, whtScore, playerName);
 		vp.getChildren().add(scoreBoard);
 	}
