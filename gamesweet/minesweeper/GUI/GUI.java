@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import gamesweet.hub.App;
 import gamesweet.minesweeper.enumpkg.Squares;
 import gamesweet.minesweeper.model.Board;
-import gamesweet.minesweeper.model.Leaderboard;
 import gamesweet.stratego.models.Flag;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -44,7 +44,6 @@ public class GUI {
 	private Label timerLabel = new Label();
 	private Label score = new Label();
 	private Button flag = new Button();
-	private static Leaderboard lb;
 
 	public void run(Stage primaryStage) {
 		try {
@@ -67,7 +66,7 @@ public class GUI {
 			medium.setOnAction(e -> mediumClicked());
 			hard.setOnAction(e -> hardClicked());
 			difficultyMenu.getItems().addAll(easy, medium, hard);
-			gameMenu.getItems().addAll(difficultyMenu, new MenuItem("View Highscores"));
+			gameMenu.getItems().addAll(difficultyMenu);
 
 			Menu helpMenu = new Menu("Help");
 			MenuItem h2P = new MenuItem("How to Play");
@@ -76,7 +75,7 @@ public class GUI {
 							+ "'mines' \n or bombs without detonating any of them, with help from clues about"
 							+ " \n the number of neighboring mines in each field. "));
 			MenuItem hub = new MenuItem("Go Back to HUB");
-//			hub.setOnAction(e -> );
+			hub.setOnAction(e -> backToHub());
 			helpMenu.getItems().addAll(h2P, hub);
 
 			MenuBar menuBar = new MenuBar();
@@ -248,6 +247,12 @@ public class GUI {
 		}
 	}
 
+	private void backToHub() {
+		App.playerLayout.getChildren().removeAll(App.playerOne, App.playerTwo);
+		newStage.setScene(App.gameSelection);
+		newStage.show();
+	}
+
 	private void revealSquare(Button[][] gridArray, Board gameBoard, int row, int column) {
 		revealNeighbors(gridArray, gameBoard, row - 1, column - 1);
 		revealNeighbors(gridArray, gameBoard, row, column - 1);
@@ -409,57 +414,4 @@ public class GUI {
 		run(newStage);
 	}
 
-	private static void saveState() {
-		String fileName = "leaderboard.save";
-		FileOutputStream file = null;
-		ObjectOutputStream out = null;
-
-		try {
-			file = new FileOutputStream(fileName);
-			out = new ObjectOutputStream(file);
-			out.writeObject(lb);
-
-			System.out.println("Save Succesful");
-		} catch (IOException ex) {
-			System.out.println("An error has occured saving the file");
-		} finally {
-			try {
-				out.close();
-				file.close();
-			} catch (IOException ex) {
-				System.out.println("An error has occured closing the stream");
-				return;
-			} catch (NullPointerException nul) {
-				System.out.println("An error has occured closing the stream");
-				return;
-			}
-		}
-	}
-
-	private static void loadState() {
-		FileInputStream file = null;
-		ObjectInputStream in = null;
-		String fileName = "leaderboard.save";
-		try {
-			file = new FileInputStream(fileName);
-			in = new ObjectInputStream(file);
-			lb = (Leaderboard) in.readObject();
-			System.out.println("File Found");
-		} catch (IOException ex) {
-			System.out.println("File Not Found");
-		} catch (ClassNotFoundException classnot) {
-			System.out.println("File Not Found");
-		} finally {
-			try {
-				in.close();
-				file.close();
-			} catch (IOException ex) {
-				System.out.println("Error Closing Stream");
-				return;
-			} catch (NullPointerException np) {
-				System.out.println("Invalid Campaign File");
-				return;
-			}
-		}
-	}
 }
